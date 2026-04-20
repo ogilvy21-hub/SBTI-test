@@ -1,0 +1,193 @@
+<style>
+:root{
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-background-danger: #fff1f2;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-text-danger: #e11d48;
+  --color-border-primary: #222222;
+  --color-border-secondary: #d9d9d9;
+  --color-border-tertiary: #e5e5e5;
+  --color-border-danger: #f43f5e;
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#f3f3f3}
+#app{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
+.screen{display:none}
+.screen.active{display:block}
+.tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--color-background-danger);color:var(--color-text-danger);margin-bottom:1rem}
+h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.2;margin-bottom:.75rem}
+.sub{font-size:15px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem}
+.start-btn{width:100%;padding:14px;border-radius:var(--border-radius-lg);border:1.5px solid var(--color-border-primary);background:var(--color-background-primary);font-size:16px;font-weight:500;color:var(--color-text-primary);cursor:pointer;transition:background .15s}
+.start-btn:hover{background:var(--color-background-secondary)}
+.prog-wrap{margin-bottom:1.5rem}
+.prog-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+.prog-fill{height:100%;background:var(--color-text-danger);border-radius:2px;transition:width .3s ease}
+.prog-label{font-size:12px;color:var(--color-text-tertiary)}
+.q-num{font-size:12px;font-weight:500;color:var(--color-text-danger);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+.q-text{font-size:18px;font-weight:500;color:var(--color-text-primary);line-height:1.5;margin-bottom:1.25rem}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{padding:14px 16px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary);background:var(--color-background-primary);font-size:14px;color:var(--color-text-primary);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.choice:hover{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.choice.selected{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.nav-row{display:flex;gap:8px;margin-top:1.25rem}
+.nav-btn{flex:1;padding:12px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.next{border-color:var(--color-border-danger);color:var(--color-text-danger)}
+.nav-btn.next:hover{background:var(--color-background-danger)}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.result-icon{font-size:48px;margin-bottom:1rem;display:block;text-align:center}
+.result-type{font-size:13px;font-weight:500;color:var(--color-text-danger);text-align:center;margin-bottom:.4rem;letter-spacing:.06em}
+.result-name{font-size:26px;font-weight:500;color:var(--color-text-primary);text-align:center;margin-bottom:1rem}
+.score-bar-wrap{background:var(--color-background-secondary);border-radius:4px;height:8px;margin-bottom:1.5rem;overflow:hidden}
+.score-bar-fill{height:100%;background:var(--color-text-danger);border-radius:4px;transition:width 1s ease}
+.result-desc{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.5rem}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.trait{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:13px;color:var(--color-text-secondary)}
+.trait strong{display:block;font-size:12px;color:var(--color-text-tertiary);font-weight:400;margin-bottom:2px}
+.retry-btn{width:100%;padding:13px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:background .15s}
+.retry-btn:hover{background:var(--color-background-secondary)}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
+.home-link{display:inline-block;margin-top:1rem;font-size:13px;color:var(--color-text-tertiary);text-decoration:none}
+.home-link:hover{color:var(--color-text-primary)}
+</style>
+
+<div id="app">
+  <h2 class="sr-only" style="position:absolute;left:-9999px">회사생활 테스트 — 나는 직장에서 얼마나 참는 사람일까?</h2>
+
+  <div id="intro" class="screen active">
+    <div class="tag">회사생활 테스트</div>
+    <h1>나는 과연<br>회사에서 얼마나 참는 사람일까?</h1>
+    <p class="sub">8가지 직장 상황에서 당신의 반응을 선택하면<br>당신의 회사생활 유형을 알려드립니다.</p>
+    <div class="divider"></div>
+    <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+
+  <div id="quiz" class="screen">
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+      <div class="prog-label" id="prog-label">1 / 8</div>
+    </div>
+    <div class="q-num" id="q-num">Q 1</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="choices" id="choices"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prev-btn" onclick="prevQ()" disabled>이전</button>
+      <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
+    </div>
+  </div>
+
+  <div id="result" class="screen">
+    <span class="result-icon" id="r-icon"></span>
+    <div class="result-type" id="r-type"></div>
+    <div class="result-name" id="r-name"></div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
+    <div class="result-desc" id="r-desc"></div>
+    <div class="traits" id="r-traits"></div>
+    <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+</div>
+
+<script>
+const qs=[
+  {q:"내가 한 일을 상사가 별 설명 없이 다시 하라고 한다.",c:["그냥 다시 한다.","속으론 답답하지만 따르긴 한다.","이유를 조심스럽게 묻는다.","납득 안 되면 분명히 이야기한다."]},
+  {q:"회의에서 내 아이디어를 다른 사람이 먼저 자기 것처럼 말한다.",c:["일단 넘어간다.","끝나고 따로 말할지 고민한다.","회의 중 적당히 정정한다.","바로 내 아이디어라고 분명히 말한다."]},
+  {q:"퇴근 직전에 급한 일이 생겼다고 추가 업무를 받았다.",c:["군말 없이 한다.","불만은 있지만 한다.","우선순위를 확인해본다.","이건 무리라고 선을 긋는다."]},
+  {q:"동료가 자꾸 자기 일을 은근히 나에게 넘긴다.",c:["한두 번은 그냥 도와준다.","계속되면 좀 짜증 난다.","반복되면 어렵다고 말한다.","내 일이 아니면 확실히 거절한다."]},
+  {q:"상사가 사람들 앞에서 내 실수를 지적했다.",c:["가만히 듣는다.","민망하지만 참는다.","나중에 따로 말하고 싶어진다.","공개적인 지적 방식이 불편하다고 전한다."]},
+  {q:"점심시간에도 회사 이야기를 계속 꺼내는 분위기다.",c:["그냥 맞춰준다.","조금 피곤하지만 듣는다.","적당히 화제를 돌려본다.","쉬는 시간은 쉬고 싶다고 말한다."]},
+  {q:"내 성과는 작게 다뤄지고, 다른 사람 성과만 크게 칭찬받는다.",c:["원래 회사가 그렇지 싶다.","서운하지만 티는 안 낸다.","평가 기준이 궁금해진다.","기여한 부분을 분명히 알린다."]},
+  {q:"휴가 중인데 회사 연락이 반복해서 온다.",c:["바로 응답한다.","휴가지만 확인은 한다.","급한 건지 먼저 판단한다.","휴가 중에는 어렵다고 선을 긋는다."]},
+];
+
+const results=[
+  {min:0,max:6,icon:"🙂",type:"순응 적응형",name:"참는 직장인",desc:"회사 안에서 갈등을 만들기보다 적응을 택하는 타입입니다. 분위기를 깨지 않으려 하고, 웬만한 일은 참고 넘어가는 편입니다. 조직 적응력은 좋지만, 기준 없이 참기만 하면 쉽게 지칠 수 있습니다.",traits:["적응력 높음","갈등 회피 성향","인내심 강함","피로 누적 가능"]},
+  {min:7,max:12,icon:"🤝",type:"현실 균형형",name:"눈치 좋은 실무형",desc:"필요한 순간에는 말하지만 불필요한 충돌은 피하는 타입입니다. 상황을 보고 조절할 줄 알고, 조직 안에서 비교적 영리하게 움직입니다. 가장 현실적인 회사생활 감각을 가진 편입니다.",traits:["상황 판단 좋음","실무 감각 있음","조절 능력 우수","무난한 대응"]},
+  {min:13,max:18,icon:"💼",type:"기준 표현형",name:"할 말은 하는 직장인",desc:"부당하거나 반복되는 상황에서는 참지 않고 말하는 타입입니다. 무조건 강하게 나가진 않지만, 내 기준과 역할은 분명히 지키려 합니다. 일 잘하면서도 스스로를 지키는 힘이 있는 편입니다.",traits:["기준 분명함","자기표현 가능","역할 의식 강함","부당함에 민감"]},
+  {min:19,max:24,icon:"🔥",type:"단호 경계형",name:"선 긋는 직장인",desc:"회사에서도 내 시간과 역할의 경계를 확실히 지키는 타입입니다. 부당한 요구나 반복되는 무례에는 빠르게 선을 긋고, 필요하면 분명하게 대응합니다. 덕분에 쉽게 소모되지 않지만, 때로는 강하게 보일 수도 있습니다.",traits:["경계 설정 강함","거절 잘함","자기보호 능숙","단호한 태도"]},
+];
+
+let cur=0,scores=Array(qs.length).fill(-1);
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  renderQ();
+  show('quiz');
+}
+
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('prog').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('prog-label').textContent=(cur+1)+' / '+qs.length;
+  document.getElementById('q-num').textContent='Q '+(cur+1);
+  document.getElementById('q-text').textContent=q.q;
+  const ch=document.getElementById('choices');
+  ch.innerHTML='';
+  q.c.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice'+(scores[cur]===i?' selected':'');
+    btn.textContent=c;
+    btn.onclick=()=>pick(i);
+    ch.appendChild(btn);
+  });
+  document.getElementById('prev-btn').disabled=cur===0;
+  document.getElementById('next-btn').disabled=scores[cur]===-1;
+  document.getElementById('next-btn').textContent=cur===qs.length-1?'결과 보기':'다음';
+}
+
+function pick(i){
+  scores[cur]=i;
+  document.querySelectorAll('.choice').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
+  document.getElementById('next-btn').disabled=false;
+}
+
+function prevQ(){
+  if(cur>0){
+    cur--;
+    renderQ();
+  }
+}
+
+function nextQ(){
+  if(scores[cur]===-1)return;
+  if(cur<qs.length-1){
+    cur++;
+    renderQ();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  const total=scores.reduce((a,b)=>a+b,0);
+  const r=results.find(x=>total>=x.min&&total<=x.max);
+  document.getElementById('r-icon').textContent=r.icon;
+  document.getElementById('r-type').textContent=r.type;
+  document.getElementById('r-name').textContent=r.name;
+  document.getElementById('r-desc').textContent=r.desc;
+  const tr=document.getElementById('r-traits');
+  tr.innerHTML=r.traits.map(t=>`<div class="trait"><strong>특징</strong>${t}</div>`).join('');
+  show('result');
+  setTimeout(()=>{document.getElementById('r-bar').style.width=Math.round(total/24*100)+'%'},100);
+}
+
+function restart(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  document.getElementById('r-bar').style.width='0%';
+  show('intro');
+}
+</script>
