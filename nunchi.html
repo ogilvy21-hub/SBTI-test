@@ -1,0 +1,193 @@
+<style>
+:root{
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-background-danger: #fff1f2;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-text-danger: #e11d48;
+  --color-border-primary: #222222;
+  --color-border-secondary: #d9d9d9;
+  --color-border-tertiary: #e5e5e5;
+  --color-border-danger: #f43f5e;
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#f3f3f3}
+#app{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
+.screen{display:none}
+.screen.active{display:block}
+.tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--color-background-danger);color:var(--color-text-danger);margin-bottom:1rem}
+h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.2;margin-bottom:.75rem}
+.sub{font-size:15px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem}
+.start-btn{width:100%;padding:14px;border-radius:var(--border-radius-lg);border:1.5px solid var(--color-border-primary);background:var(--color-background-primary);font-size:16px;font-weight:500;color:var(--color-text-primary);cursor:pointer;transition:background .15s}
+.start-btn:hover{background:var(--color-background-secondary)}
+.prog-wrap{margin-bottom:1.5rem}
+.prog-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+.prog-fill{height:100%;background:var(--color-text-danger);border-radius:2px;transition:width .3s ease}
+.prog-label{font-size:12px;color:var(--color-text-tertiary)}
+.q-num{font-size:12px;font-weight:500;color:var(--color-text-danger);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+.q-text{font-size:18px;font-weight:500;color:var(--color-text-primary);line-height:1.5;margin-bottom:1.25rem}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{padding:14px 16px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary);background:var(--color-background-primary);font-size:14px;color:var(--color-text-primary);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.choice:hover{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.choice.selected{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.nav-row{display:flex;gap:8px;margin-top:1.25rem}
+.nav-btn{flex:1;padding:12px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.next{border-color:var(--color-border-danger);color:var(--color-text-danger)}
+.nav-btn.next:hover{background:var(--color-background-danger)}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.result-icon{font-size:48px;margin-bottom:1rem;display:block;text-align:center}
+.result-type{font-size:13px;font-weight:500;color:var(--color-text-danger);text-align:center;margin-bottom:.4rem;letter-spacing:.06em}
+.result-name{font-size:26px;font-weight:500;color:var(--color-text-primary);text-align:center;margin-bottom:1rem}
+.score-bar-wrap{background:var(--color-background-secondary);border-radius:4px;height:8px;margin-bottom:1.5rem;overflow:hidden}
+.score-bar-fill{height:100%;background:var(--color-text-danger);border-radius:4px;transition:width 1s ease}
+.result-desc{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.5rem}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.trait{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:13px;color:var(--color-text-secondary)}
+.trait strong{display:block;font-size:12px;color:var(--color-text-tertiary);font-weight:400;margin-bottom:2px}
+.retry-btn{width:100%;padding:13px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:background .15s}
+.retry-btn:hover{background:var(--color-background-secondary)}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
+.home-link{display:inline-block;margin-top:1rem;font-size:13px;color:var(--color-text-tertiary);text-decoration:none}
+.home-link:hover{color:var(--color-text-primary)}
+</style>
+
+<div id="app">
+  <h2 class="sr-only" style="position:absolute;left:-9999px">눈치력 테스트 — 나는 얼마나 분위기를 잘 읽을까?</h2>
+
+  <div id="intro" class="screen active">
+    <div class="tag">눈치력 테스트</div>
+    <h1>나는 과연<br>얼마나 눈치가 빠를까?</h1>
+    <p class="sub">8가지 상황에서 당신의 반응을 선택하면<br>당신의 눈치력 유형을 알려드립니다.</p>
+    <div class="divider"></div>
+    <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+
+  <div id="quiz" class="screen">
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+      <div class="prog-label" id="prog-label">1 / 8</div>
+    </div>
+    <div class="q-num" id="q-num">Q 1</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="choices" id="choices"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prev-btn" onclick="prevQ()" disabled>이전</button>
+      <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
+    </div>
+  </div>
+
+  <div id="result" class="screen">
+    <span class="result-icon" id="r-icon"></span>
+    <div class="result-type" id="r-type"></div>
+    <div class="result-name" id="r-name"></div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
+    <div class="result-desc" id="r-desc"></div>
+    <div class="traits" id="r-traits"></div>
+    <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+</div>
+
+<script>
+const qs=[
+  {q:"단톡방에서 평소 말 많던 사람이 갑자기 조용해졌다.",c:["아무 생각 없다.","피곤한가 보다 하고 넘긴다.","무슨 일 있나 눈치챈다.","바로 분위기 이상함을 감지한다."]},
+  {q:"회의 중 팀장이 짧게 '이건 다시 보죠'라고 말했다.",c:["그 말 그대로만 듣는다.","조금 별로였나 싶다.","좋지 않게 봤다는 걸 눈치챈다.","사실상 반려에 가깝다는 걸 바로 안다."]},
+  {q:"친구가 '난 괜찮아'라고 했는데 표정이 굳어 있다.",c:["괜찮다니 믿는다.","조금 신경 쓰이지만 넘어간다.","안 괜찮은 것 같다고 느낀다.","왜 저런지 바로 감정 상태를 읽는다."]},
+  {q:"식사 자리에서 누군가 계속 물만 마시고 거의 말을 하지 않는다.",c:["원래 말이 없나 보다.","컨디션이 안 좋나 싶다.","지금 자리가 불편한가 생각한다.","분위기에 적응 못 하고 있다는 걸 바로 눈치챈다."]},
+  {q:"상대가 답장은 빠른데 문장이 짧고 이모티콘이 없다.",c:["원래 그런 스타일인가 보다.","별 의미 없다고 생각한다.","조금 거리감이 느껴진다.","상대 텐션이 달라졌다는 걸 바로 느낀다."]},
+  {q:"모임에서 농담을 했는데 몇 명이 웃지 않았다.",c:["그냥 넘어간다.","타이밍이 별로였나 싶다.","내 말이 조금 어색했나 생각한다.","순간적으로 분위기 싸해진 걸 바로 캐치한다."]},
+  {q:"상사가 '편하게 말해요'라고 했지만 표정은 딱딱하다.",c:["정말 편하게 말하면 된다고 생각한다.","조금 조심해야겠다 싶다.","말은 편하게 하라지만 선이 있다고 느낀다.","실제로는 편하게 말하면 안 되는 상황임을 안다."]},
+  {q:"약속 자리에서 두 사람이 서로 웃고 있지만 대화가 부자연스럽다.",c:["사이가 좋은가 보다.","조금 어색하네 싶다.","둘 사이에 미묘한 게 있다고 느낀다.","겉으론 웃어도 불편한 긴장감이 있는 걸 바로 읽는다."]},
+];
+
+const results=[
+  {min:0,max:6,icon:"😌",type:"둔감 평온형",name:"해맑은 무던형",desc:"사람들의 표정과 분위기에 크게 흔들리지 않는 타입입니다. 좋은 의미로는 편안하고 무던하지만, 때로는 중요한 신호를 놓칠 수 있습니다. 관계의 미묘한 결을 조금만 더 살피면 더 강한 사람이 됩니다.",traits:["스트레스 적음","무던한 편","분위기 영향 적음","신호 포착 약함"]},
+  {min:7,max:12,icon:"🙂",type:"보통 감지형",name:"생활 눈치형",desc:"기본적인 분위기 변화는 잘 읽는 편입니다. 너무 예민하지도 않고, 너무 둔하지도 않아 일상 관계에서 무난하게 잘 적응합니다. 대부분의 상황에서 적절하게 반응하는 현실적인 타입입니다.",traits:["균형 감각","무난한 적응력","관계 대응 안정적","기본 눈치 보유"]},
+  {min:13,max:18,icon:"👀",type:"빠른 감지형",name:"분위기 레이더형",desc:"사람의 말투, 표정, 타이밍 같은 작은 변화도 잘 포착하는 타입입니다. 덕분에 실수를 줄이고 관계를 세심하게 다루지만, 가끔은 너무 많이 읽어서 피곤해질 수도 있습니다.",traits:["표정 변화 감지","상황 해석 빠름","관계 센스 좋음","피로 누적 가능"]},
+  {min:19,max:24,icon:"🧠",type:"초예민 통찰형",name:"눈치 만렙형",desc:"분위기, 감정선, 숨은 의미를 거의 본능적으로 읽는 타입입니다. 눈치가 빠른 수준을 넘어 장면 전체를 파악하는 편이라 사람들 사이의 미묘한 긴장도 잘 알아챕니다. 다만 너무 많이 읽으면 스스로 지칠 수 있으니 한 걸음 물러나는 연습도 필요합니다.",traits:["감정선 해석 탁월","긴장감 즉시 포착","관계 통찰력 높음","예민함 관리 필요"]},
+];
+
+let cur=0,scores=Array(qs.length).fill(-1);
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  renderQ();
+  show('quiz');
+}
+
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('prog').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('prog-label').textContent=(cur+1)+' / '+qs.length;
+  document.getElementById('q-num').textContent='Q '+(cur+1);
+  document.getElementById('q-text').textContent=q.q;
+  const ch=document.getElementById('choices');
+  ch.innerHTML='';
+  q.c.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice'+(scores[cur]===i?' selected':'');
+    btn.textContent=c;
+    btn.onclick=()=>pick(i);
+    ch.appendChild(btn);
+  });
+  document.getElementById('prev-btn').disabled=cur===0;
+  document.getElementById('next-btn').disabled=scores[cur]===-1;
+  document.getElementById('next-btn').textContent=cur===qs.length-1?'결과 보기':'다음';
+}
+
+function pick(i){
+  scores[cur]=i;
+  document.querySelectorAll('.choice').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
+  document.getElementById('next-btn').disabled=false;
+}
+
+function prevQ(){
+  if(cur>0){
+    cur--;
+    renderQ();
+  }
+}
+
+function nextQ(){
+  if(scores[cur]===-1)return;
+  if(cur<qs.length-1){
+    cur++;
+    renderQ();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  const total=scores.reduce((a,b)=>a+b,0);
+  const r=results.find(x=>total>=x.min&&total<=x.max);
+  document.getElementById('r-icon').textContent=r.icon;
+  document.getElementById('r-type').textContent=r.type;
+  document.getElementById('r-name').textContent=r.name;
+  document.getElementById('r-desc').textContent=r.desc;
+  const tr=document.getElementById('r-traits');
+  tr.innerHTML=r.traits.map(t=>`<div class="trait"><strong>특징</strong>${t}</div>`).join('');
+  show('result');
+  setTimeout(()=>{document.getElementById('r-bar').style.width=Math.round(total/24*100)+'%'},100);
+}
+
+function restart(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  document.getElementById('r-bar').style.width='0%';
+  show('intro');
+}
+</script>
