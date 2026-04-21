@@ -1,0 +1,211 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+:root{
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-background-danger: #fff1f2;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-text-danger: #e11d48;
+  --color-border-primary: #222222;
+  --color-border-secondary: #d9d9d9;
+  --color-border-tertiary: #e5e5e5;
+  --color-border-danger: #f43f5e;
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#f3f3f3}
+#app{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
+.screen{display:none}
+.screen.active{display:block}
+.tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--color-background-danger);color:var(--color-text-danger);margin-bottom:1rem}
+h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.2;margin-bottom:.75rem}
+.sub{font-size:15px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem}
+.start-btn{width:100%;padding:14px;border-radius:var(--border-radius-lg);border:1.5px solid var(--color-border-primary);background:var(--color-background-primary);font-size:16px;font-weight:500;color:var(--color-text-primary);cursor:pointer;transition:background .15s}
+.start-btn:hover{background:var(--color-background-secondary)}
+.prog-wrap{margin-bottom:1.5rem}
+.prog-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+.prog-fill{height:100%;background:var(--color-text-danger);border-radius:2px;transition:width .3s ease}
+.prog-label{font-size:12px;color:var(--color-text-tertiary)}
+.q-num{font-size:12px;font-weight:500;color:var(--color-text-danger);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+.q-text{font-size:18px;font-weight:500;color:var(--color-text-primary);line-height:1.5;margin-bottom:1.25rem}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{padding:14px 16px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary);background:var(--color-background-primary);font-size:14px;color:var(--color-text-primary);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.choice:hover{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.choice.selected{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.nav-row{display:flex;gap:8px;margin-top:1.25rem}
+.nav-btn{flex:1;padding:12px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.next{border-color:var(--color-border-danger);color:var(--color-text-danger)}
+.nav-btn.next:hover{background:var(--color-background-danger)}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.result-icon{font-size:48px;margin-bottom:1rem;display:block;text-align:center}
+.result-type{font-size:13px;font-weight:500;color:var(--color-text-danger);text-align:center;margin-bottom:.4rem;letter-spacing:.06em}
+.result-name{font-size:26px;font-weight:500;color:var(--color-text-primary);text-align:center;margin-bottom:1rem}
+.score-bar-wrap{background:var(--color-background-secondary);border-radius:4px;height:8px;margin-bottom:1.5rem;overflow:hidden}
+.score-bar-fill{height:100%;background:var(--color-text-danger);border-radius:4px;transition:width 1s ease}
+.result-desc{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.5rem}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.trait{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:13px;color:var(--color-text-secondary)}
+.trait strong{display:block;font-size:12px;color:var(--color-text-tertiary);font-weight:400;margin-bottom:2px}
+.retry-btn{width:100%;padding:13px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:background .15s}
+.retry-btn:hover{background:var(--color-background-secondary)}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
+.home-link{display:inline-block;margin-top:1rem;font-size:13px;color:var(--color-text-tertiary);text-decoration:none}
+.home-link:hover{color:var(--color-text-primary)}
+.adsense-inpost-bottom{margin:24px 0 8px;}
+</style>
+
+<div id="app">
+  <h2 class="sr-only" style="position:absolute;left:-9999px">정뚝떨력 테스트 — 나는 얼마나 한순간에 마음이 식는 사람일까?</h2>
+
+  <div id="intro" class="screen active">
+    <div class="tag">SBTI 정뚝떨력 테스트</div>
+    <h1>나는 과연<br>한순간에 마음이 식는 사람일까?</h1>
+    <p class="sub">8가지 상황에서 당신의 반응을 선택하면<br>당신의 정뚝떨력 유형을 알려드립니다.</p>
+    <div class="divider"></div>
+    <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+
+  <div id="quiz" class="screen">
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+      <div class="prog-label" id="prog-label">1 / 8</div>
+    </div>
+    <div class="q-num" id="q-num">Q 1</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="choices" id="choices"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prev-btn" onclick="prevQ()" disabled>이전</button>
+      <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
+    </div>
+  </div>
+
+  <div id="result" class="screen">
+    <span class="result-icon" id="r-icon"></span>
+    <div class="result-type" id="r-type"></div>
+    <div class="result-name" id="r-name"></div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
+    <div class="result-desc" id="r-desc"></div>
+    <div class="traits" id="r-traits"></div>
+
+    <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+</div>
+
+<script>
+const qs=[
+  {q:"호감 있던 사람이 예의 없게 말하는 걸 봤다.",c:["조금 깨지만 지켜본다.","아쉽지만 한 번은 넘긴다.","마음이 꽤 식는다.","그 순간 거의 끝난다."]},
+  {q:"좋아하던 사람이 약속 시간에 습관적으로 늦는다.",c:["사정이 있겠지 싶다.","몇 번은 이해해본다.","반복되면 금방 식는다.","시간 개념 없으면 바로 정 떨어진다."]},
+  {q:"친한 사람이 남 이야기를 가볍게 험담했다.",c:["크게 신경 안 쓴다.","조금 찜찜하다.","사람 보는 눈이 달라진다.","그 장면 하나로 마음이 확 식는다."]},
+  {q:"썸 타던 사람이 서비스직에게 무례하게 행동했다.",c:["당황하지만 좀 더 본다.","기분은 나쁘다.","호감이 크게 줄어든다.","거의 바로 끝이다."]},
+  {q:"연인이 사소한 거짓말을 했다.",c:["이유를 먼저 들어본다.","조금 실망하지만 넘어갈 수 있다.","신뢰가 깨져서 마음이 식는다.","작은 거짓말도 바로 정떨어진다."]},
+  {q:"좋아하던 사람이 자꾸 자기 자랑만 한다.",c:["조금 과하네 싶다.","가끔은 괜찮다.","계속 그러면 금방 질린다.","그런 태도는 바로 마음이 식는다."]},
+  {q:"가깝게 지내던 사람이 책임을 남에게 미룬다.",c:["상황을 더 본다.","살짝 실망한다.","이런 모습엔 금방 정이 떨어진다.","그 순간부터 다르게 보인다."]},
+  {q:"누군가의 매력보다 단점이 먼저 크게 보인 순간",c:["장단점이 다 있다고 생각한다.","조금 흔들리지만 유지된다.","호감이 빠르게 줄어든다.","마음이 한순간에 확 식는다."]},
+];
+
+const results=[
+  {min:0,max:6,icon:"🌿",type:"천천히 식는형",name:"쉽게 마음 안 식는 사람",desc:"단점 하나만 보고 바로 등을 돌리기보다, 전체를 보고 판단하는 타입입니다. 사람에 대한 호감이나 애정이 비교적 오래 유지되는 편이고, 실망스러운 장면이 있어도 쉽게 마음을 닫지 않습니다.",traits:["호감 유지력 높음","전체적으로 판단","한 번에 안 식음","관계 여지 남김"]},
+  {min:7,max:12,icon:"🙂",type:"보통 변화형",name:"식을 때는 식는 사람",desc:"기본적으로는 사람을 오래 보려 하지만, 선을 넘는 장면이 반복되면 마음이 식는 타입입니다. 단점 하나로 끝내지는 않지만, 실망이 쌓이면 호감이 눈에 띄게 줄어드는 편입니다. 가장 현실적인 정뚝떨력 유형입니다.",traits:["현실적 판단","반복에 민감","호감 변화 있음","적당한 거리조절"]},
+  {min:13,max:18,icon:"🧊",type:"빠른 냉각형",name:"정이 빨리 식는 사람",desc:"호감이 생기는 것도 빠를 수 있지만, 실망스러운 순간이 오면 마음이 빠르게 식는 타입입니다. 특히 예의, 태도, 말투처럼 기본적인 부분에 민감해서 작은 장면도 크게 작용할 수 있습니다.",traits:["태도에 민감","실망 반응 빠름","호감 감소 빠름","기준 분명함"]},
+  {min:19,max:24,icon:"✂️",type:"정뚝떨 MAX형",name:"한순간에 끝나는 사람",desc:"좋아하던 마음도 어떤 장면 하나로 거의 즉시 꺼질 수 있는 타입입니다. 한 번 '아니다' 싶으면 이전 호감이 무색할 정도로 마음이 정리되는 편입니다. 그만큼 기준이 분명하고, 아닌 관계에 미련을 덜 두는 유형입니다.",traits:["한순간에 냉각","기준 매우 뚜렷","미련 적음","아니다 싶으면 끝"]},
+];
+
+let cur=0,scores=Array(qs.length).fill(-1);
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  renderQ();
+  show('quiz');
+}
+
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('prog').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('prog-label').textContent=(cur+1)+' / '+qs.length;
+  document.getElementById('q-num').textContent='Q '+(cur+1);
+  document.getElementById('q-text').textContent=q.q;
+  const ch=document.getElementById('choices');
+  ch.innerHTML='';
+  q.c.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice'+(scores[cur]===i?' selected':'');
+    btn.textContent=c;
+    btn.onclick=()=>pick(i);
+    ch.appendChild(btn);
+  });
+  document.getElementById('prev-btn').disabled=cur===0;
+  document.getElementById('next-btn').disabled=scores[cur]===-1;
+  document.getElementById('next-btn').textContent=cur===qs.length-1?'결과 보기':'다음';
+}
+
+function pick(i){
+  scores[cur]=i;
+  document.querySelectorAll('.choice').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
+  document.getElementById('next-btn').disabled=false;
+}
+
+function prevQ(){
+  if(cur>0){
+    cur--;
+    renderQ();
+  }
+}
+
+function nextQ(){
+  if(scores[cur]===-1)return;
+  if(cur<qs.length-1){
+    cur++;
+    renderQ();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  const total=scores.reduce((a,b)=>a+b,0);
+  const r=results.find(x=>total>=x.min&&total<=x.max);
+  document.getElementById('r-icon').textContent=r.icon;
+  document.getElementById('r-type').textContent=r.type;
+  document.getElementById('r-name').textContent=r.name;
+  document.getElementById('r-desc').textContent=r.desc;
+  const tr=document.getElementById('r-traits');
+  tr.innerHTML=r.traits.map(t=>`<div class="trait"><strong>특징</strong>${t}</div>`).join('');
+  show('result');
+  setTimeout(()=>{document.getElementById('r-bar').style.width=Math.round(total/24*100)+'%'},100);
+}
+
+function restart(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  document.getElementById('r-bar').style.width='0%';
+  show('intro');
+}
+</script>
