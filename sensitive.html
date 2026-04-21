@@ -1,0 +1,211 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+:root{
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-background-danger: #fff1f2;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-text-danger: #e11d48;
+  --color-border-primary: #222222;
+  --color-border-secondary: #d9d9d9;
+  --color-border-tertiary: #e5e5e5;
+  --color-border-danger: #f43f5e;
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#f3f3f3}
+#app{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
+.screen{display:none}
+.screen.active{display:block}
+.tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--color-background-danger);color:var(--color-text-danger);margin-bottom:1rem}
+h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.2;margin-bottom:.75rem}
+.sub{font-size:15px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem}
+.start-btn{width:100%;padding:14px;border-radius:var(--border-radius-lg);border:1.5px solid var(--color-border-primary);background:var(--color-background-primary);font-size:16px;font-weight:500;color:var(--color-text-primary);cursor:pointer;transition:background .15s}
+.start-btn:hover{background:var(--color-background-secondary)}
+.prog-wrap{margin-bottom:1.5rem}
+.prog-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+.prog-fill{height:100%;background:var(--color-text-danger);border-radius:2px;transition:width .3s ease}
+.prog-label{font-size:12px;color:var(--color-text-tertiary)}
+.q-num{font-size:12px;font-weight:500;color:var(--color-text-danger);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+.q-text{font-size:18px;font-weight:500;color:var(--color-text-primary);line-height:1.5;margin-bottom:1.25rem}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{padding:14px 16px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary);background:var(--color-background-primary);font-size:14px;color:var(--color-text-primary);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.choice:hover{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.choice.selected{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.nav-row{display:flex;gap:8px;margin-top:1.25rem}
+.nav-btn{flex:1;padding:12px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.next{border-color:var(--color-border-danger);color:var(--color-text-danger)}
+.nav-btn.next:hover{background:var(--color-background-danger)}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.result-icon{font-size:48px;margin-bottom:1rem;display:block;text-align:center}
+.result-type{font-size:13px;font-weight:500;color:var(--color-text-danger);text-align:center;margin-bottom:.4rem;letter-spacing:.06em}
+.result-name{font-size:26px;font-weight:500;color:var(--color-text-primary);text-align:center;margin-bottom:1rem}
+.score-bar-wrap{background:var(--color-background-secondary);border-radius:4px;height:8px;margin-bottom:1.5rem;overflow:hidden}
+.score-bar-fill{height:100%;background:var(--color-text-danger);border-radius:4px;transition:width 1s ease}
+.result-desc{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.5rem}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.trait{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:13px;color:var(--color-text-secondary)}
+.trait strong{display:block;font-size:12px;color:var(--color-text-tertiary);font-weight:400;margin-bottom:2px}
+.retry-btn{width:100%;padding:13px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:background .15s}
+.retry-btn:hover{background:var(--color-background-secondary)}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
+.home-link{display:inline-block;margin-top:1rem;font-size:13px;color:var(--color-text-tertiary);text-decoration:none}
+.home-link:hover{color:var(--color-text-primary)}
+.adsense-inpost-bottom{margin:24px 0 8px;}
+</style>
+
+<div id="app">
+  <h2 class="sr-only" style="position:absolute;left:-9999px">예민력 테스트 — 나는 얼마나 쉽게 예민해지는 사람일까?</h2>
+
+  <div id="intro" class="screen active">
+    <div class="tag">SBTI 예민력 테스트</div>
+    <h1>나는 과연<br>얼마나 쉽게 예민해질까?</h1>
+    <p class="sub">8가지 상황에서 당신의 반응을 선택하면<br>당신의 예민력 유형을 알려드립니다.</p>
+    <div class="divider"></div>
+    <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+
+  <div id="quiz" class="screen">
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+      <div class="prog-label" id="prog-label">1 / 8</div>
+    </div>
+    <div class="q-num" id="q-num">Q 1</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="choices" id="choices"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prev-btn" onclick="prevQ()" disabled>이전</button>
+      <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
+    </div>
+  </div>
+
+  <div id="result" class="screen">
+    <span class="result-icon" id="r-icon"></span>
+    <div class="result-type" id="r-type"></div>
+    <div class="result-name" id="r-name"></div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
+    <div class="result-desc" id="r-desc"></div>
+    <div class="traits" id="r-traits"></div>
+
+    <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+</div>
+
+<script>
+const qs=[
+  {q:"조금 큰 소음이 계속 들릴 때",c:["별로 신경 안 쓴다.","조금 거슬리지만 견딘다.","계속 들리면 신경이 곤두선다.","소리만으로도 금방 예민해진다."]},
+  {q:"상대 말투가 평소보다 짧고 딱딱하다.",c:["컨디션 문제겠거니 한다.","살짝 신경 쓰이지만 넘긴다.","나 때문인가 싶어 민감해진다.","말투 하나에도 기분이 크게 흔들린다."]},
+  {q:"계획이 갑자기 바뀌었다.",c:["금방 적응한다.","조금 아쉽지만 괜찮다.","생각보다 스트레스를 받는다.","변수 하나만 생겨도 예민해진다."]},
+  {q:"옷, 온도, 촉감이 조금 불편할 때",c:["대체로 그냥 넘긴다.","조금만 불편해도 인식은 한다.","신경이 계속 거기로 간다.","사소한 불편도 오래 견디기 힘들다."]},
+  {q:"누군가 내 표정이나 반응을 지적했다.",c:["가볍게 넘긴다.","조금 민망하지만 괜찮다.","괜히 오래 신경 쓰인다.","그 말 하나로 하루 종일 예민해진다."]},
+  {q:"피곤한 날 누가 자꾸 말을 건다.",c:["웬만하면 받아준다.","조금 귀찮지만 대응한다.","예민해지는 게 느껴진다.","작은 자극도 버겁게 느껴진다."]},
+  {q:"단체 자리에서 분위기가 묘하게 어색하다.",c:["금방 잊는다.","조금은 느껴도 괜찮다.","그 공기를 계속 의식하게 된다.","어색한 분위기에 금방 지친다."]},
+  {q:"하루에 여러 자극이 겹쳤을 때",c:["그럭저럭 버틴다.","쉬면 금방 괜찮아진다.","머리가 복잡하고 날카로워진다.","사소한 것까지 다 예민하게 받아들인다."]},
+];
+
+const results=[
+  {min:0,max:6,icon:"🌿",type:"무던 안정형",name:"예민함이 적은 사람",desc:"자극이나 분위기 변화에 크게 흔들리지 않는 타입입니다. 사소한 불편과 타인의 반응을 비교적 잘 흘려보내고, 감정과 감각 모두 안정적인 편입니다. 덕분에 쉽게 지치지 않고 상황 적응도 빠른 편입니다.",traits:["자극에 강함","상황 적응 빠름","무던한 편","피로 누적 적음"]},
+  {min:7,max:12,icon:"🙂",type:"보통 감지형",name:"적당히 예민한 사람",desc:"불편함이나 분위기 변화를 느끼긴 하지만 거기에 완전히 휘둘리지는 않는 타입입니다. 신경은 쓰여도 어느 정도 선에서 정리하는 힘이 있고, 일상에서는 무난하게 균형을 유지합니다. 가장 현실적인 예민력 유형입니다.",traits:["감지력 있음","균형감 좋음","자극 인식 가능","정리하는 힘 있음"]},
+  {min:13,max:18,icon:"👀",type:"민감 반응형",name:"쉽게 예민해지는 사람",desc:"소리, 말투, 분위기, 피로 같은 자극에 비교적 빠르게 반응하는 타입입니다. 작은 변화도 크게 느껴질 수 있어 쉽게 지치거나 긴장할 때가 있습니다. 대신 감각이 섬세하고 디테일을 잘 알아차리는 장점도 있습니다.",traits:["자극에 민감","피로 누적 빠름","분위기 잘 느낌","섬세한 편"]},
+  {min:19,max:24,icon:"⚡",type:"초고감도형",name:"예민함이 큰 사람",desc:"사소한 변화도 바로 인식하고, 그 자극이 감정과 컨디션에 크게 영향을 주는 타입입니다. 말투 하나, 소리 하나, 어색한 공기 하나에도 쉽게 피로해질 수 있습니다. 그래서 자신만의 회복 루틴과 자극 관리가 특히 중요합니다.",traits:["고감도 반응","컨디션 영향 큼","쉽게 피곤해짐","회복 환경 중요"]},
+];
+
+let cur=0,scores=Array(qs.length).fill(-1);
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  renderQ();
+  show('quiz');
+}
+
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('prog').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('prog-label').textContent=(cur+1)+' / '+qs.length;
+  document.getElementById('q-num').textContent='Q '+(cur+1);
+  document.getElementById('q-text').textContent=q.q;
+  const ch=document.getElementById('choices');
+  ch.innerHTML='';
+  q.c.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice'+(scores[cur]===i?' selected':'');
+    btn.textContent=c;
+    btn.onclick=()=>pick(i);
+    ch.appendChild(btn);
+  });
+  document.getElementById('prev-btn').disabled=cur===0;
+  document.getElementById('next-btn').disabled=scores[cur]===-1;
+  document.getElementById('next-btn').textContent=cur===qs.length-1?'결과 보기':'다음';
+}
+
+function pick(i){
+  scores[cur]=i;
+  document.querySelectorAll('.choice').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
+  document.getElementById('next-btn').disabled=false;
+}
+
+function prevQ(){
+  if(cur>0){
+    cur--;
+    renderQ();
+  }
+}
+
+function nextQ(){
+  if(scores[cur]===-1)return;
+  if(cur<qs.length-1){
+    cur++;
+    renderQ();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  const total=scores.reduce((a,b)=>a+b,0);
+  const r=results.find(x=>total>=x.min&&total<=x.max);
+  document.getElementById('r-icon').textContent=r.icon;
+  document.getElementById('r-type').textContent=r.type;
+  document.getElementById('r-name').textContent=r.name;
+  document.getElementById('r-desc').textContent=r.desc;
+  const tr=document.getElementById('r-traits');
+  tr.innerHTML=r.traits.map(t=>`<div class="trait"><strong>특징</strong>${t}</div>`).join('');
+  show('result');
+  setTimeout(()=>{document.getElementById('r-bar').style.width=Math.round(total/24*100)+'%'},100);
+}
+
+function restart(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  document.getElementById('r-bar').style.width='0%';
+  show('intro');
+}
+</script>
