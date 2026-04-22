@@ -1,0 +1,211 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+:root{
+  --font-sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-background-danger: #fff1f2;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #888888;
+  --color-text-danger: #e11d48;
+  --color-border-primary: #222222;
+  --color-border-secondary: #d9d9d9;
+  --color-border-tertiary: #e5e5e5;
+  --color-border-danger: #f43f5e;
+  --border-radius-lg: 16px;
+  --border-radius-md: 12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:#f3f3f3}
+#app{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
+.screen{display:none}
+.screen.active{display:block}
+.tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--color-background-danger);color:var(--color-text-danger);margin-bottom:1rem}
+h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.2;margin-bottom:.75rem}
+.sub{font-size:15px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem}
+.start-btn{width:100%;padding:14px;border-radius:var(--border-radius-lg);border:1.5px solid var(--color-border-primary);background:var(--color-background-primary);font-size:16px;font-weight:500;color:var(--color-text-primary);cursor:pointer;transition:background .15s}
+.start-btn:hover{background:var(--color-background-secondary)}
+.prog-wrap{margin-bottom:1.5rem}
+.prog-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;margin-bottom:.5rem}
+.prog-fill{height:100%;background:var(--color-text-danger);border-radius:2px;transition:width .3s ease}
+.prog-label{font-size:12px;color:var(--color-text-tertiary)}
+.q-num{font-size:12px;font-weight:500;color:var(--color-text-danger);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+.q-text{font-size:18px;font-weight:500;color:var(--color-text-primary);line-height:1.5;margin-bottom:1.25rem}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{padding:14px 16px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary);background:var(--color-background-primary);font-size:14px;color:var(--color-text-primary);cursor:pointer;text-align:left;transition:all .15s;line-height:1.5}
+.choice:hover{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.choice.selected{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
+.nav-row{display:flex;gap:8px;margin-top:1.25rem}
+.nav-btn{flex:1;padding:12px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.next{border-color:var(--color-border-danger);color:var(--color-text-danger)}
+.nav-btn.next:hover{background:var(--color-background-danger)}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.result-icon{font-size:48px;margin-bottom:1rem;display:block;text-align:center}
+.result-type{font-size:13px;font-weight:500;color:var(--color-text-danger);text-align:center;margin-bottom:.4rem;letter-spacing:.06em}
+.result-name{font-size:26px;font-weight:500;color:var(--color-text-primary);text-align:center;margin-bottom:1rem}
+.score-bar-wrap{background:var(--color-background-secondary);border-radius:4px;height:8px;margin-bottom:1.5rem;overflow:hidden}
+.score-bar-fill{height:100%;background:var(--color-text-danger);border-radius:4px;transition:width 1s ease}
+.result-desc{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.5rem}
+.traits{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.trait{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:13px;color:var(--color-text-secondary)}
+.trait strong{display:block;font-size:12px;color:var(--color-text-tertiary);font-weight:400;margin-bottom:2px}
+.retry-btn{width:100%;padding:13px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer;transition:background .15s}
+.retry-btn:hover{background:var(--color-background-secondary)}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
+.home-link{display:inline-block;margin-top:1rem;font-size:13px;color:var(--color-text-tertiary);text-decoration:none}
+.home-link:hover{color:var(--color-text-primary)}
+.adsense-inpost-bottom{margin:24px 0 8px;}
+</style>
+
+<div id="app">
+  <h2 class="sr-only" style="position:absolute;left:-9999px">회피력 테스트 — 나는 얼마나 불편한 상황을 피하는 사람일까?</h2>
+
+  <div id="intro" class="screen active">
+    <div class="tag">SBTI 회피력 테스트</div>
+    <h1>나는 과연<br>얼마나 잘 피하는 사람일까?</h1>
+    <p class="sub">8가지 상황에서 당신의 반응을 선택하면<br>당신의 회피력 유형을 알려드립니다.</p>
+    <div class="divider"></div>
+    <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+
+  <div id="quiz" class="screen">
+    <div class="prog-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+      <div class="prog-label" id="prog-label">1 / 8</div>
+    </div>
+    <div class="q-num" id="q-num">Q 1</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="choices" id="choices"></div>
+    <div class="nav-row">
+      <button class="nav-btn" id="prev-btn" onclick="prevQ()" disabled>이전</button>
+      <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
+    </div>
+  </div>
+
+  <div id="result" class="screen">
+    <span class="result-icon" id="r-icon"></span>
+    <div class="result-type" id="r-type"></div>
+    <div class="result-name" id="r-name"></div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
+    <div class="result-desc" id="r-desc"></div>
+    <div class="traits" id="r-traits"></div>
+
+    <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </div>
+</div>
+
+<script>
+const qs=[
+  {q:"답장해야 할 메시지가 부담스럽다.",c:["바로 답한다.","조금 미루지만 결국 답한다.","계속 미루다가 늦게 답한다.","아예 못 본 척하고 싶어진다."]},
+  {q:"누군가와 불편한 대화를 해야 한다.",c:["정면으로 얘기한다.","조금 긴장하지만 한다.","타이밍을 계속 미룬다.","가능하면 그 상황 자체를 피한다."]},
+  {q:"해야 할 일이 있는데 마음이 무겁다.",c:["그래도 바로 시작한다.","조금 쉬었다가 시작한다.","딴짓부터 하며 미룬다.","생각만 하다가 끝낸다."]},
+  {q:"모임에서 어색한 사람이 있다.",c:["그냥 인사하고 넘긴다.","조금 불편하지만 버틴다.","최대한 마주칠 일을 줄인다.","안 가는 쪽을 택한다."]},
+  {q:"실수한 일을 다시 확인해야 한다.",c:["바로 확인하고 처리한다.","긴장되지만 본다.","보기 싫어서 계속 늦춘다.","현실 직면이 싫어 피하게 된다."]},
+  {q:"갈등이 생겼을 때 나는",c:["바로 풀려고 한다.","상황 보고 말한다.","웬만하면 조용히 넘기려 한다.","그냥 멀어지는 게 편하다."]},
+  {q:"전화 한 통이면 끝날 일을 앞두고",c:["바로 건다.","잠깐 망설였다가 건다.","계속 타이밍만 본다.","문자나 미룸으로 버틴다."]},
+  {q:"불편한 현실이 눈앞에 있을 때",c:["정리하고 바로 움직인다.","시간이 좀 걸려도 마주한다.","자꾸 다른 생각으로 도망간다.","안 보고 안 들으면 괜찮아질 것 같다."]},
+];
+
+const results=[
+  {min:0,max:6,icon:"🧭",type:"직면형",name:"피하지 않는 사람",desc:"불편한 상황이 와도 정면으로 마주하려는 타입입니다. 부담이 없진 않지만, 피하는 것보다 해결하는 쪽이 더 편하다고 느끼는 편입니다. 덕분에 일이 크게 꼬이기 전에 정리하는 힘이 있습니다.",traits:["직면력 높음","해결 중심","미루기 적음","상황 정리 빠름"]},
+  {min:7,max:12,icon:"🙂",type:"보통 회피형",name:"조금 피하지만 결국 하는 사람",desc:"불편한 상황을 아주 좋아하진 않지만, 완전히 도망치지도 않는 타입입니다. 잠깐 미루거나 숨을 고른 뒤 결국은 처리하는 편이라, 현실과 회피 사이의 균형이 어느 정도 있습니다. 가장 현실적인 회피력 유형입니다.",traits:["조금 미룸","결국 처리함","균형감 있음","현실형"]},
+  {min:13,max:18,icon:"🌫️",type:"회피 성향형",name:"불편하면 자꾸 미루는 사람",desc:"부담되는 대화, 일, 현실 앞에서 자꾸 뒤로 물러나는 타입입니다. 해야 한다는 걸 알면서도 손이 잘 안 가고, 상황이 무거울수록 딴짓이나 미루기로 빠지기 쉽습니다. 시작만 하면 되는데 그 시작이 가장 어려운 유형입니다.",traits:["부담 회피 경향","미루기 잦음","직면 스트레스 큼","시작이 어려움"]},
+  {min:19,max:24,icon:"🏃",type:"회피 MAX형",name:"일단 피하고 보는 사람",desc:"불편함이 느껴지면 해결보다 회피가 먼저 떠오르는 타입입니다. 답장, 전화, 갈등, 확인 같은 상황을 정면으로 보기보다 뒤로 미루거나 아예 피해버리고 싶어질 수 있습니다. 마음을 지키려는 방식일 수 있지만, 오래 끌수록 더 커질 수 있습니다.",traits:["회피 반응 빠름","불편함에 약함","미룸 강함","현실 직면 어려움"]},
+];
+
+let cur=0,scores=Array(qs.length).fill(-1);
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  renderQ();
+  show('quiz');
+}
+
+function renderQ(){
+  const q=qs[cur];
+  document.getElementById('prog').style.width=((cur+1)/qs.length*100)+'%';
+  document.getElementById('prog-label').textContent=(cur+1)+' / '+qs.length;
+  document.getElementById('q-num').textContent='Q '+(cur+1);
+  document.getElementById('q-text').textContent=q.q;
+  const ch=document.getElementById('choices');
+  ch.innerHTML='';
+  q.c.forEach((c,i)=>{
+    const btn=document.createElement('button');
+    btn.className='choice'+(scores[cur]===i?' selected':'');
+    btn.textContent=c;
+    btn.onclick=()=>pick(i);
+    ch.appendChild(btn);
+  });
+  document.getElementById('prev-btn').disabled=cur===0;
+  document.getElementById('next-btn').disabled=scores[cur]===-1;
+  document.getElementById('next-btn').textContent=cur===qs.length-1?'결과 보기':'다음';
+}
+
+function pick(i){
+  scores[cur]=i;
+  document.querySelectorAll('.choice').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
+  document.getElementById('next-btn').disabled=false;
+}
+
+function prevQ(){
+  if(cur>0){
+    cur--;
+    renderQ();
+  }
+}
+
+function nextQ(){
+  if(scores[cur]===-1)return;
+  if(cur<qs.length-1){
+    cur++;
+    renderQ();
+  }else{
+    showResult();
+  }
+}
+
+function showResult(){
+  const total=scores.reduce((a,b)=>a+b,0);
+  const r=results.find(x=>total>=x.min&&total<=x.max);
+  document.getElementById('r-icon').textContent=r.icon;
+  document.getElementById('r-type').textContent=r.type;
+  document.getElementById('r-name').textContent=r.name;
+  document.getElementById('r-desc').textContent=r.desc;
+  const tr=document.getElementById('r-traits');
+  tr.innerHTML=r.traits.map(t=>`<div class="trait"><strong>특징</strong>${t}</div>`).join('');
+  show('result');
+  setTimeout(()=>{document.getElementById('r-bar').style.width=Math.round(total/24*100)+'%'},100);
+}
+
+function restart(){
+  cur=0;
+  scores=Array(qs.length).fill(-1);
+  document.getElementById('r-bar').style.width='0%';
+  show('intro');
+}
+</script>
