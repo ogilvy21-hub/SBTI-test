@@ -1,0 +1,404 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
+</style>
+
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">망상연애력</h1>
+    <p class="sub">나는 혼자 얼마나 로맨스를 크게 키우는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
+
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
+</div>
+
+<script>
+  const questions = [
+    {
+      q:"상대가 친절하게 웃어줬다.",
+      a:[
+        ["그냥 친절하구나 한다",0],
+        ["기분은 좋아진다",1],
+        ["혹시 싶긴 하다",2],
+        ["이미 1화 엔딩이 나왔다",3]
+      ]
+    },
+    {
+      q:"답장이 평소보다 빨리 왔다.",
+      a:[
+        ["그냥 본다",0],
+        ["살짝 좋다",1],
+        ["의미를 조금 찾는다",2],
+        ["이건 분명 신호다",3]
+      ]
+    },
+    {
+      q:"상대가 내 취향을 기억했다.",
+      a:[
+        ["기억력이 좋네 한다",0],
+        ["고맙다고 느낀다",1],
+        ["조금 설렌다",2],
+        ["우리 서사가 시작됐다고 본다",3]
+      ]
+    },
+    {
+      q:"우연히 자주 마주친다.",
+      a:[
+        ["우연이라고 생각한다",0],
+        ["신기하긴 하다",1],
+        ["괜히 의식된다",2],
+        ["운명이 출근을 시작했다",3]
+      ]
+    },
+    {
+      q:"상대가 내 게시물에 반응했다.",
+      a:[
+        ["그냥 반응이다",0],
+        ["기분은 좋다",1],
+        ["한 번 더 보게 된다",2],
+        ["이건 공개 고백의 전 단계다",3]
+      ]
+    },
+    {
+      q:"상대와 대화가 조금 잘 통했다.",
+      a:[
+        ["대화가 잘 맞네 한다",0],
+        ["좋은 사람 같다고 느낀다",1],
+        ["혼자 조금 설렌다",2],
+        ["이미 여행 계획까지 갔다",3]
+      ]
+    },
+    {
+      q:"상대의 사소한 말이 계속 떠오른다.",
+      a:[
+        ["금방 잊는다",0],
+        ["가끔 생각난다",1],
+        ["자주 곱씹는다",2],
+        ["대사집처럼 저장해둔다",3]
+      ]
+    },
+    {
+      q:"내 연애 상상 스타일은?",
+      a:[
+        ["현실 위주다",0],
+        ["조금 상상한다",1],
+        ["꽤 자주 이어 붙인다",2],
+        ["혼자 시즌제로 제작한다",3]
+      ]
+    }
+  ];
+
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"🙂",
+      type:"현실 연애형",
+      name:"신호보다 사실을 보는 사람",
+      desc:"당신은 사소한 친절을 쉽게 로맨스로 키우지 않는다. 웃음은 웃음으로, 답장은 답장으로 받아들이는 편이다. 설렘이 없어서가 아니라, 마음을 움직이기 전에 현실을 먼저 확인하는 사람이다.",
+      traits:["친절과 호감을 잘 구분함","상상보다 현실 확인이 먼저임","혼자 앞서가지 않음","마음의 속도가 안정적임"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"☺️",
+      type:"가벼운 설렘형",
+      name:"괜히 기분 좋아지는 사람",
+      desc:"당신은 사소한 신호에 살짝 설레지만, 금방 현실로 돌아올 줄 안다. 친절한 말 한마디에 기분이 좋아지고, 빠른 답장에 미소가 나오지만 아직 드라마를 크게 키우지는 않는다.",
+      traits:["작은 친절에 기분이 좋아짐","설레도 금방 현실로 돌아옴","의미를 조금 찾는 편","감정이 귀엽게 흔들림"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"💭",
+      type:"서사 생성형",
+      name:"혼자 3화까지 본 사람",
+      desc:"당신은 사소한 장면에서도 이야기를 만든다. 웃어준 이유, 답장이 빨랐던 이유, 취향을 기억한 이유가 머릿속에서 하나씩 이어진다. 아직 현실은 시작도 안 했는데 마음속에서는 이미 관계도가 그려진다.",
+      traits:["사소한 말에 의미를 붙임","혼자 장면을 이어 붙임","설렘이 오래 남음","현실보다 상상이 조금 빠름"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"🎬",
+      type:"로맨스 제작형",
+      name:"혼자 드라마 편성한 사람",
+      desc:"당신의 머릿속 연애는 이미 제작비가 들어갔다. 우연한 마주침은 복선이 되고, 답장 하나는 명대사가 되며, 친절한 웃음은 엔딩 장면으로 커진다. 현실의 속도보다 상상의 편집 속도가 훨씬 빠른 타입이다.",
+      traits:["우연도 운명처럼 해석함","답장 하나에 서사가 생김","혼자 설렘을 크게 키움","머릿속 로맨스 편집이 빠름"]
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+
+  function startQuiz(){
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
+
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
+
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(point){
+    score += point;
+    current++;
+
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
+
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    finalResult = results.find(r => score >= r.min && score <= r.max);
+
+    document.getElementById("resultIcon").innerText = finalResult.icon;
+    document.getElementById("resultType").innerText = finalResult.type;
+    document.getElementById("resultName").innerText = finalResult.name;
+    document.getElementById("resultDesc").innerText = finalResult.desc;
+
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
+    finalResult.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const text = `SBTI 망상연애력 테스트 결과: ${finalResult.name}`;
+    const url = location.href;
+
+    if(navigator.share){
+      navigator.share({
+        title:"SBTI 망상연애력 테스트",
+        text:text,
+        url:url
+      });
+    }else{
+      navigator.clipboard.writeText(`${text}\n${url}`);
+      alert("결과 링크가 복사됐습니다.");
+    }
+  }
+</script>
