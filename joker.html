@@ -2,550 +2,445 @@
         crossorigin="anonymous"></script>
 
 <style>
-:root{
-  --font-sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;
-  --color-background-primary:#fff;
-  --color-background-secondary:#f5f5f5;
-  --color-background-danger:#fff7ed;
-
-  --color-text-primary:#111;
-  --color-text-secondary:#555;
-  --color-text-tertiary:#888;
-  --color-text-danger:#ea580c;
-
-  --color-border-primary:#222;
-  --color-border-secondary:#d9d9d9;
-  --color-border-tertiary:#e5e5e5;
-  --color-border-danger:#fb923c;
-
-  --border-radius-lg:16px;
-  --border-radius-md:12px;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:var(--font-sans);
-  background:#f3f3f3;
-  color:#111;
-}
-
-#app{
-  max-width:560px;
-  margin:0 auto;
-  padding:1.5rem 1rem;
-}
-
-.screen{display:none}
-.screen.active{display:block}
-
-.tag{
-  display:inline-block;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.08em;
-  padding:4px 10px;
-  border-radius:20px;
-  background:#fff7ed;
-  color:#ea580c;
-  margin-bottom:1rem;
-}
-
-h1{
-  font-size:30px;
-  line-height:1.2;
-  margin-bottom:.8rem;
-}
-
-.sub{
-  font-size:15px;
-  color:#555;
-  line-height:1.6;
-  margin-bottom:1.5rem;
-}
-
-.divider{
-  height:1px;
-  background:#ddd;
-  margin:1.3rem 0;
-}
-
-.start-btn,
-.retry-btn{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:16px;
-  background:#111;
-  color:#fff;
-  font-size:15px;
-  cursor:pointer;
-}
-
-.prog-wrap{margin-bottom:1.4rem}
-
-.prog-bar{
-  height:6px;
-  background:#e8e8e8;
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.prog-fill{
-  height:100%;
-  width:0%;
-  background:#f97316;
-  transition:.25s;
-}
-
-.prog-label{
-  margin-top:.5rem;
-  font-size:12px;
-  color:#777;
-}
-
-.q-num{
-  font-size:12px;
-  color:#ea580c;
-  margin-bottom:.4rem;
-}
-
-.q-text{
-  font-size:22px;
-  line-height:1.45;
-  margin-bottom:1.2rem;
-}
-
-.choices{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.choice{
-  width:100%;
-  text-align:left;
-  border:1px solid #ddd;
-  background:#fff;
-  padding:15px;
-  border-radius:16px;
-  font-size:15px;
-  line-height:1.5;
-  cursor:pointer;
-  transition:.15s;
-}
-
-.choice:hover{
-  border-color:#fb923c;
-  background:#fff7ed;
-}
-
-.choice.selected{
-  border-color:#f97316;
-  background:#fff7ed;
-}
-
-.nav-row{
-  display:flex;
-  gap:10px;
-  margin-top:1.2rem;
-}
-
-.nav-btn{
-  flex:1;
-  padding:13px;
-  border-radius:14px;
-  border:none;
-  background:#e8e8e8;
-  cursor:pointer;
-}
-
-.nav-btn.next{
-  background:#111;
-  color:#fff;
-}
-
-.result-icon{
-  display:block;
-  text-align:center;
-  font-size:54px;
-  margin-bottom:1rem;
-}
-
-.result-type{
-  text-align:center;
-  font-size:14px;
-  color:#ea580c;
-  margin-bottom:.4rem;
-  font-weight:600;
-}
-
-.result-name{
-  text-align:center;
-  font-size:42px;
-  margin-bottom:1rem;
-  font-weight:700;
-}
-
-.score-bar-wrap{
-  width:100%;
-  height:14px;
-  border-radius:999px;
-  background:#ececec;
-  overflow:hidden;
-  margin-bottom:1.5rem;
-}
-
-.score-bar-fill{
-  height:100%;
-  width:0%;
-  background:#f97316;
-  transition:1s;
-}
-
-.result-desc{
-  background:#f5f5f5;
-  border-radius:20px;
-  padding:1.5rem;
-  line-height:1.8;
-  color:#555;
-  font-size:15px;
-  margin-bottom:1.5rem;
-}
-
-.traits{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:1.5rem;
-}
-
-.trait{
-  background:#fff;
-  border:1px solid #e5e5e5;
-  border-radius:16px;
-  padding:14px;
-  font-size:15px;
-  color:#444;
-}
-
-.trait strong{
-  display:block;
-  color:#888;
-  font-size:12px;
-  margin-bottom:5px;
-}
-
-.home-link{
-  display:inline-block;
-  margin-top:1rem;
-  font-size:13px;
-  color:#888;
-  text-decoration:none;
-}
-
-.adsense-inpost-bottom{
-  margin:24px 0 8px;
-}
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
 </style>
 
-<div id="app">
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">광대력</h1>
+    <p class="sub">나는 분위기를 살리려고 얼마나 나를 웃기는 사람으로 쓰는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
 
-<div id="intro" class="screen active">
-  <div class="tag">SBTI 광대력 테스트</div>
-
-  <h1>나는 분위기를 위해<br>웃긴 척하는 사람일까?</h1>
-
-  <p class="sub">
-    분위기가 싸해지면 괜히 말 한마디 더 하게 되는 사람.<br>
-    모두 웃을 때까지 혼자 애쓰는 사람.<br><br>
-    당신 안의 광대력을 확인해보세요.
-  </p>
-
-  <div class="divider"></div>
-
-  <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
-
-  <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
-</div>
-
-<div id="quiz" class="screen">
-
-  <div class="prog-wrap">
-    <div class="prog-bar">
-      <div class="prog-fill" id="prog"></div>
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
     </div>
-    <div class="prog-label" id="prog-label">1 / 8</div>
-  </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
 
-  <div class="q-num" id="q-num"></div>
-  <div class="q-text" id="q-text"></div>
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
 
-  <div class="choices" id="choices"></div>
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
 
-  <div class="nav-row">
-    <button class="nav-btn" onclick="prevQ()">이전</button>
-    <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
-  </div>
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
 
-</div>
-
-<div id="result" class="screen">
-
-  <span class="result-icon" id="r-icon"></span>
-  <div class="result-type" id="r-type"></div>
-  <div class="result-name" id="r-name"></div>
-
-  <div class="score-bar-wrap">
-    <div class="score-bar-fill" id="r-bar"></div>
-  </div>
-
-  <div class="result-desc" id="r-desc"></div>
-
-  <div class="traits" id="r-traits"></div>
-
-  <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
-
-  <div class="adsense-slot adsense-inpost-bottom">
-    <ins class="adsbygoogle"
-         style="display:block; width:100%;"
-         data-ad-client="ca-pub-6295549457389423"
-         data-ad-slot="4063532035"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-
-  <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
-
-</div>
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
 </div>
 
 <script>
-const questions = [
-{
-q:"단톡방 분위기가 싸해졌다.",
-a:[
-["굳이 안 나선다",0],
-["가볍게 반응한다",1],
-["분위기 살릴 드립을 친다",2],
-["혼자서라도 분위기 살리려 한다",3]
-]
-},
-{
-q:"사람들이 웃으면 기분이 좋아진다.",
-a:[
-["별 느낌 없다",0],
-["적당히 좋다",1],
-["꽤 뿌듯하다",2],
-["내 존재 이유 같다",3]
-]
-},
-{
-q:"처음 보는 사람들과 있을 때",
-a:[
-["조용히 있는 편",0],
-["눈치 보며 적응",1],
-["먼저 분위기를 푼다",2],
-["내가 분위기 담당이 된다",3]
-]
-},
-{
-q:"내 이야기보다 웃긴 이야기를 더 많이 한다.",
-a:[
-["거의 안 한다",0],
-["가끔 한다",1],
-["자주 한다",2],
-["습관처럼 한다",3]
-]
-},
-{
-q:"사람들이 조용하면 괜히 불안하다.",
-a:[
-["전혀 아니다",0],
-["조금 그렇다",1],
-["꽤 그렇다",2],
-["못 참고 뭔가 한다",3]
-]
-},
-{
-q:"내가 희생해서 분위기 맞춘 적",
-a:[
-["거의 없다",0],
-["조금 있다",1],
-["꽤 많다",2],
-["매우 많다",3]
-]
-},
-{
-q:"사람들이 날 재밌는 사람으로 기억하면",
-a:[
-["상관없다",0],
-["나쁘지 않다",1],
-["좋다",2],
-["그게 가장 좋다",3]
-]
-},
-{
-q:"혼자 있을 때 실제 성격은",
-a:[
-["차분하다",0],
-["평범하다",1],
-["생각보다 조용하다",2],
-["완전 다른 사람 같다",3]
-]
-}
-];
+  const questions = [
+    {
+      q:"대화가 갑자기 조용해졌다.",
+      a:[
+        ["그냥 있는다",0],
+        ["조금 어색하다",1],
+        ["뭔가 말해야 할 것 같다",2],
+        ["바로 웃길 말부터 찾는다",3]
+      ]
+    },
+    {
+      q:"친구가 기분이 안 좋아 보인다.",
+      a:[
+        ["조용히 기다린다",0],
+        ["무슨 일인지 묻는다",1],
+        ["분위기를 풀어주려 한다",2],
+        ["내 몸개그라도 써서 웃기고 싶다",3]
+      ]
+    },
+    {
+      q:"사람들이 내 농담에 웃었다.",
+      a:[
+        ["그냥 기분 좋다",0],
+        ["조금 더 말하고 싶다",1],
+        ["분위기가 산 것 같아 뿌듯하다",2],
+        ["그 순간부터 2절이 시작된다",3]
+      ]
+    },
+    {
+      q:"모임에서 누가 어색해한다.",
+      a:[
+        ["각자 적응하겠지 한다",0],
+        ["조금 신경 쓰인다",1],
+        ["말을 걸어본다",2],
+        ["내가 먼저 망가져서 분위기를 풀려 한다",3]
+      ]
+    },
+    {
+      q:"내 이야기가 웃긴 소재가 됐다.",
+      a:[
+        ["조금 민망하다",0],
+        ["괜찮으면 넘긴다",1],
+        ["분위기 좋으면 받아준다",2],
+        ["내 흑역사까지 셀프 공개한다",3]
+      ]
+    },
+    {
+      q:"단톡방 분위기가 식었다.",
+      a:[
+        ["신경 안 쓴다",0],
+        ["조금 아쉽다",1],
+        ["짤 하나 보낸다",2],
+        ["내가 광대 출근해야 하나 싶다",3]
+      ]
+    },
+    {
+      q:"사람들이 나를 웃긴 사람으로 본다.",
+      a:[
+        ["그렇게 보이든 말든 괜찮다",0],
+        ["나쁘진 않다",1],
+        ["기대에 맞추려 할 때가 있다",2],
+        ["웃겨야 할 것 같아서 부담될 때도 있다",3]
+      ]
+    },
+    {
+      q:"내 분위기 살리기 습관은?",
+      a:[
+        ["거의 없다",0],
+        ["가끔 한다",1],
+        ["자주 한다",2],
+        ["어색하면 내가 먼저 희생된다",3]
+      ]
+    }
+  ];
 
-const results = [
-{
-min:0,max:5,
-icon:"🪨",
-type:"무덤덤형",
-name:"분위기 무관심러",
-desc:"억지로 분위기를 맞추지 않는 타입입니다. 조용한 상황도 편하게 받아들이고, 굳이 웃기려 애쓰지 않습니다.",
-traits:["감정 소비 적음","혼자도 편함","분위기 휘말림 적음","현실적"]
-},
-{
-min:6,max:11,
-icon:"🙂",
-type:"적당한 사회형",
-name:"눈치형 리액션러",
-desc:"필요할 때는 분위기를 맞추지만, 선을 넘지는 않는 타입입니다. 사회성도 있지만 에너지 조절도 잘합니다.",
-traits:["적당한 리액션","사회성 있음","눈치 빠름","균형형"]
-},
-{
-min:12,max:17,
-icon:"🎭",
-type:"분위기 메이커형",
-name:"사람 웃기는 게 좋은 사람",
-desc:"사람들이 웃는 걸 좋아하고, 분위기를 자연스럽게 이끄는 타입입니다. 주변에서 은근히 많이 찾는 스타일입니다.",
-traits:["리액션 좋음","분위기 리더","친화력 높음","유머 사용"]
-},
-{
-min:18,max:24,
-icon:"🤡",
-type:"광대 MAX형",
-name:"분위기 살리다 지친 사람",
-desc:"어색한 공기만 보면 몸이 먼저 반응하는 타입입니다. 모두 웃고 있어도 혼자 계속 분위기를 챙기고 있을 가능성이 큽니다.",
-traits:["분위기 집착","과몰입형","희생 잦음","혼자 지침"]
-}
-];
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"🙂",
+      type:"담백 관찰형",
+      name:"굳이 웃기지 않아도 편한 사람",
+      desc:"당신은 분위기를 억지로 살리려 하지 않는다. 조용한 순간도 자연스럽게 받아들이고, 내가 꼭 뭔가 해야 한다고 느끼지 않는다. 편안한 침묵을 견딜 줄 아는 사람이다.",
+      traits:["어색함을 크게 부담스러워하지 않음","억지 농담을 잘 하지 않음","조용한 분위기도 받아들임","분위기 책임을 혼자 지지 않음"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"😌",
+      type:"가벼운 분위기형",
+      name:"필요할 때 한마디 던지는 사람",
+      desc:"당신은 분위기가 너무 가라앉으면 가볍게 말을 보탠다. 억지로 웃기려 하지는 않지만, 적당한 농담이나 리액션으로 공기를 부드럽게 만든다. 무리하지 않는 사회형 광대다.",
+      traits:["가벼운 농담을 잘 씀","분위기를 적당히 살림","무리하게 망가지진 않음","리액션이 자연스러운 편"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"🤡",
+      type:"분위기 책임형",
+      name:"어색하면 내가 먼저 나서는 사람",
+      desc:"당신은 분위기가 어색해지면 가만히 있기가 어렵다. 누군가 웃어주면 안심하고, 모임이 살아나면 내가 역할을 했다고 느낀다. 다만 가끔은 나를 너무 빨리 웃긴 사람으로 내보낸다.",
+      traits:["어색한 분위기를 잘 못 견딤","농담으로 공기를 바꾸려 함","사람들이 웃으면 안심함","분위기 책임을 떠안을 때가 있음"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"🎪",
+      type:"광대 과몰입형",
+      name:"분위기 살리다 내가 사라지는 사람",
+      desc:"당신은 모임의 공기가 가라앉으면 자동으로 무대에 오른다. 웃기려고 나를 낮추고, 민망한 이야기도 꺼내고, 어색함을 혼자 받아낸다. 사람들은 웃지만 당신은 집에 와서 조용히 방전될 수 있다.",
+      traits:["어색하면 바로 광대 모드가 켜짐","셀프 디스를 자주 씀","사람들 반응에 민감함","분위기 살린 뒤 혼자 지침"]
+    }
+  ];
 
-let current = 0;
-let scores = [];
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+  let finalResultIndex = null;
 
-function startQuiz(){
-  current = 0;
-  scores = [];
-  showScreen("quiz");
-  renderQuestion();
-}
-
-function renderQuestion(){
-
-  const q = questions[current];
-
-  document.getElementById("prog").style.width =
-    ((current)/questions.length)*100 + "%";
-
-  document.getElementById("prog-label").innerText =
-    (current+1)+" / "+questions.length;
-
-  document.getElementById("q-num").innerText =
-    "Q"+(current+1);
-
-  document.getElementById("q-text").innerText = q.q;
-
-  const wrap = document.getElementById("choices");
-  wrap.innerHTML = "";
-
-  q.a.forEach((item,idx)=>{
-
-    const btn = document.createElement("button");
-    btn.className = "choice";
-    btn.innerText = item[0];
-
-    btn.onclick = ()=>{
-
-      document.querySelectorAll(".choice")
-        .forEach(el=>el.classList.remove("selected"));
-
-      btn.classList.add("selected");
-
-      scores[current] = item[1];
-
-      document.getElementById("next-btn").disabled = false;
-    };
-
-    wrap.appendChild(btn);
-  });
-
-  document.getElementById("next-btn").disabled = true;
-}
-
-function nextQ(){
-
-  if(current < questions.length-1){
-
-    current++;
-    renderQuestion();
-
-  }else{
-
-    showResult();
+  function startQuiz(){
+    history.replaceState(null, "", location.pathname);
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
   }
-}
 
-function prevQ(){
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
 
-  if(current===0)return;
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
 
-  current--;
-  renderQuestion();
-}
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
 
-function showResult(){
+  function selectAnswer(point){
+    score += point;
+    current++;
 
-  const total = scores.reduce((a,b)=>a+b,0);
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
 
-  const result = results.find(r =>
-    total >= r.min && total <= r.max
-  );
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
 
-  showScreen("result");
+    finalResultIndex = results.findIndex(r => score >= r.min && score <= r.max);
+    finalResult = results[finalResultIndex];
 
-  document.getElementById("r-icon").innerText = result.icon;
-  document.getElementById("r-type").innerText = result.type;
-  document.getElementById("r-name").innerText = result.name;
-  document.getElementById("r-desc").innerText = result.desc;
+    renderResult(finalResult);
+  }
 
-  document.getElementById("r-bar").style.width =
-    ((total/24)*100)+"%";
+  function renderResult(resultData){
+    document.getElementById("resultIcon").innerText = resultData.icon;
+    document.getElementById("resultType").innerText = resultData.type;
+    document.getElementById("resultName").innerText = resultData.name;
+    document.getElementById("resultDesc").innerText = resultData.desc;
 
-  document.getElementById("r-traits").innerHTML =
-    result.traits.map(t => `
-      <div class="trait">
-        <strong>특징</strong>
-        ${t}
-      </div>
-    `).join("");
-}
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
 
-function restart(){
+    resultData.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
 
-  showScreen("intro");
-}
+  function openSharedResult(){
+    const params = new URLSearchParams(location.search);
+    const resultParam = params.get("r");
 
-function showScreen(id){
+    if(resultParam === null) return;
 
-  document.querySelectorAll(".screen")
-    .forEach(el=>el.classList.remove("active"));
+    const index = Number(resultParam);
 
-  document.getElementById(id)
-    .classList.add("active");
-}
+    if(Number.isNaN(index) || !results[index]) return;
+
+    finalResultIndex = index;
+    finalResult = results[index];
+
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    renderResult(finalResult);
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    finalResultIndex = null;
+
+    history.replaceState(null, "", location.pathname);
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const testName = document.querySelector(".title")?.innerText || "SBTI";
+    const pageUrl = `${location.origin}${location.pathname}?r=${finalResultIndex}`;
+
+    const shareText =
+`SBTI ${testName} 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
+
+    if(navigator.share){
+      navigator.share({
+        title:`SBTI ${testName} 테스트`,
+        text:shareText
+      });
+    }else{
+      navigator.clipboard.writeText(shareText);
+      alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", openSharedResult);
 </script>
