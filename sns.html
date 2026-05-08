@@ -1,0 +1,404 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
+</style>
+
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">SNS중독력</h1>
+    <p class="sub">나는 얼마나 자주 남의 일상 속에 들어가는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
+
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
+</div>
+
+<script>
+  const questions = [
+    {
+      q:"잠깐 폰을 켰는데 SNS가 보였다.",
+      a:[
+        ["그냥 닫는다",0],
+        ["한두 개만 본다",1],
+        ["조금 더 보게 된다",2],
+        ["시간이 사라진다",3]
+      ]
+    },
+    {
+      q:"친구 스토리가 올라왔다.",
+      a:[
+        ["나중에 본다",0],
+        ["보이면 본다",1],
+        ["대부분 확인한다",2],
+        ["안 보면 뭔가 놓친 기분이다",3]
+      ]
+    },
+    {
+      q:"내 게시물 반응을 확인할 때 나는?",
+      a:[
+        ["크게 신경 안 쓴다",0],
+        ["가끔 본다",1],
+        ["꽤 자주 확인한다",2],
+        ["좋아요 숫자가 내 기분을 건드린다",3]
+      ]
+    },
+    {
+      q:"누가 여행 사진을 올렸다.",
+      a:[
+        ["그냥 넘긴다",0],
+        ["좋겠다 정도 생각한다",1],
+        ["계속 보게 된다",2],
+        ["갑자기 내 삶이 심심해 보인다",3]
+      ]
+    },
+    {
+      q:"SNS를 보다가 아는 사람 계정에 들어갔다.",
+      a:[
+        ["금방 나온다",0],
+        ["몇 개만 본다",1],
+        ["피드까지 내려본다",2],
+        ["어느새 주변 인물까지 파악한다",3]
+      ]
+    },
+    {
+      q:"새 게시물을 올린 뒤 마음은?",
+      a:[
+        ["올리고 잊는다",0],
+        ["반응이 궁금하긴 하다",1],
+        ["몇 번 확인한다",2],
+        ["새로고침이 손에 익었다",3]
+      ]
+    },
+    {
+      q:"SNS를 안 본 하루가 있었다.",
+      a:[
+        ["괜찮다",0],
+        ["조금 허전하다",1],
+        ["뭔가 놓친 느낌이다",2],
+        ["세상에서 나만 빠진 기분이다",3]
+      ]
+    },
+    {
+      q:"내 SNS 사용 스타일은?",
+      a:[
+        ["필요할 때만 본다",0],
+        ["심심하면 본다",1],
+        ["습관처럼 자주 본다",2],
+        ["손이 먼저 앱을 연다",3]
+      ]
+    }
+  ];
+
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"🙂",
+      type:"SNS 거리두기형",
+      name:"피드 밖에서도 잘 사는 사람",
+      desc:"당신은 SNS에 크게 끌려다니지 않는다. 남의 일상을 봐도 내 하루가 흔들리지 않고, 반응 숫자에도 마음을 오래 맡기지 않는다. 필요할 때만 들어가고, 나올 때도 비교적 깔끔하다.",
+      traits:["SNS 확인이 급하지 않음","남의 일상에 덜 흔들림","반응 숫자에 비교적 담담함","오프라인 하루도 잘 보냄"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"😌",
+      type:"가벼운 구경형",
+      name:"심심하면 피드 산책하는 사람",
+      desc:"당신은 SNS를 가볍게 즐기는 편이다. 심심할 때 피드를 보고, 스토리를 훑고, 마음에 드는 게시물에 반응한다. 가끔 오래 보기도 하지만 아직은 일상 전체를 흔들 정도는 아니다.",
+      traits:["심심할 때 SNS를 봄","스토리를 가볍게 확인함","반응이 궁금하긴 함","사용 후 금방 돌아올 수 있음"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"📱",
+      type:"피드 순회형",
+      name:"남의 일상까지 출석 체크하는 사람",
+      desc:"당신은 SNS를 꽤 자주 확인한다. 친구의 스토리, 게시물 반응, 아는 사람의 근황이 자연스럽게 하루 안으로 들어온다. 안 보면 큰일은 아니지만, 보고 나면 이상하게 더 보고 싶어진다.",
+      traits:["스토리 확인이 습관적임","게시물 반응을 자주 봄","남의 근황에 쉽게 들어감","SNS 시간이 예상보다 길어짐"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"🌀",
+      type:"타임라인 거주형",
+      name:"피드에 월세 내도 되는 사람",
+      desc:"당신의 손은 SNS 앱 위치를 너무 잘 안다. 잠깐 본다는 말은 자주 무너지고, 스토리 하나가 피드 순회로 이어진다. 남의 일상, 내 반응, 알고리즘 추천이 하루 곳곳에 자연스럽게 끼어든다.",
+      traits:["앱을 무의식적으로 켬","스토리와 피드를 계속 순회함","반응 숫자에 기분이 흔들림","SNS 없는 시간이 허전함"]
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+
+  function startQuiz(){
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
+
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
+
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(point){
+    score += point;
+    current++;
+
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
+
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    finalResult = results.find(r => score >= r.min && score <= r.max);
+
+    document.getElementById("resultIcon").innerText = finalResult.icon;
+    document.getElementById("resultType").innerText = finalResult.type;
+    document.getElementById("resultName").innerText = finalResult.name;
+    document.getElementById("resultDesc").innerText = finalResult.desc;
+
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
+    finalResult.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const text = `SBTI SNS중독력 테스트 결과: ${finalResult.name}`;
+    const url = location.href;
+
+    if(navigator.share){
+      navigator.share({
+        title:"SBTI SNS중독력 테스트",
+        text:text,
+        url:url
+      });
+    }else{
+      navigator.clipboard.writeText(`${text}\n${url}`);
+      alert("결과 링크가 복사됐습니다.");
+    }
+  }
+</script>
