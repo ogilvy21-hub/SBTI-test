@@ -387,18 +387,22 @@
   }
 
   function shareResult(){
-    const text = `SBTI 불안예측력 테스트 결과: ${finalResult.name}`;
-    const url = location.href;
+  const pageUrl = location.origin + location.pathname;
 
-    if(navigator.share){
-      navigator.share({
-        title:"SBTI 불안예측력 테스트",
-        text:text,
-        url:url
-      });
-    }else{
-      navigator.clipboard.writeText(`${text}\n${url}`);
-      alert("결과 링크가 복사됐습니다.");
-    }
+  const shareText =
+`SBTI 테스트명 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
+
+  if(navigator.share){
+    navigator.share({
+      title:"SBTI 테스트명 테스트",
+      text:shareText
+    });
+  }else{
+    navigator.clipboard.writeText(shareText);
+    alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
   }
+}
 </script>
