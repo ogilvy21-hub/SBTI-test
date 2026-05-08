@@ -2,82 +2,189 @@
         crossorigin="anonymous"></script>
 
 <style>
-:root{
-  --font-sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;
-  --color-background-primary:#fff;--color-background-secondary:#f5f5f5;--color-background-danger:#fff1f2;
-  --color-text-primary:#111;--color-text-secondary:#555;--color-text-tertiary:#888;--color-text-danger:#e11d48;
-  --color-border-primary:#222;--color-border-secondary:#d9d9d9;--color-border-tertiary:#e5e5e5;--color-border-danger:#f43f5e;
-  --border-radius-lg:16px;--border-radius-md:12px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans);background:#f3f3f3}
-#app{max-width:560px;margin:0 auto;padding:1.5rem 1rem}
-.screen{display:none}.screen.active{display:block}
-.tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;background:var(--color-background-danger);color:var(--color-text-danger);margin-bottom:1rem}
-h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.2;margin-bottom:.75rem}
-.sub{font-size:15px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem}
-.start-btn{width:100%;padding:14px;border-radius:var(--border-radius-lg);border:1.5px solid var(--color-border-primary);background:var(--color-background-primary);font-size:16px;font-weight:500;color:var(--color-text-primary);cursor:pointer}
-.start-btn:hover{background:var(--color-background-secondary)}
-.prog-wrap{margin-bottom:1.5rem}.prog-bar{height:4px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden;margin-bottom:.5rem}.prog-fill{height:100%;background:var(--color-text-danger);border-radius:2px;transition:width .3s ease}.prog-label{font-size:12px;color:var(--color-text-tertiary)}
-.q-num{font-size:12px;font-weight:500;color:var(--color-text-danger);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
-.q-text{font-size:18px;font-weight:500;color:var(--color-text-primary);line-height:1.5;margin-bottom:1.25rem}
-.choices{display:flex;flex-direction:column;gap:8px}
-.choice{padding:14px 16px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary);background:var(--color-background-primary);font-size:14px;color:var(--color-text-primary);cursor:pointer;text-align:left;line-height:1.5}
-.choice:hover,.choice.selected{border-color:var(--color-border-danger);background:var(--color-background-danger);color:var(--color-text-danger)}
-.nav-row{display:flex;gap:8px;margin-top:1.25rem}
-.nav-btn{flex:1;padding:12px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer}
-.nav-btn.next{border-color:var(--color-border-danger);color:var(--color-text-danger)}
-.nav-btn:disabled{opacity:.35;cursor:not-allowed}
-.result-icon{font-size:48px;margin-bottom:1rem;display:block;text-align:center}
-.result-type{font-size:13px;font-weight:500;color:var(--color-text-danger);text-align:center;margin-bottom:.4rem;letter-spacing:.06em}
-.result-name{font-size:26px;font-weight:500;color:var(--color-text-primary);text-align:center;margin-bottom:1rem}
-.score-bar-wrap{background:var(--color-background-secondary);border-radius:4px;height:8px;margin-bottom:1.5rem;overflow:hidden}
-.score-bar-fill{height:100%;background:var(--color-text-danger);border-radius:4px;transition:width 1s ease}
-.result-desc{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;font-size:14px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.5rem}
-.traits{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
-.trait{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:13px;color:var(--color-text-secondary)}
-.trait strong{display:block;font-size:12px;color:var(--color-text-tertiary);font-weight:400;margin-bottom:2px}
-.retry-btn{width:100%;padding:13px;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-secondary);background:var(--color-background-primary);font-size:14px;font-weight:500;color:var(--color-text-secondary);cursor:pointer}
-.divider{height:.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
-.home-link{display:inline-block;margin-top:1rem;font-size:13px;color:var(--color-text-tertiary);text-decoration:none}
-.home-link:hover{color:var(--color-text-primary)}
-.adsense-inpost-bottom{margin:24px 0 8px;}
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
 </style>
 
-<div id="app">
-  <h2 class="sr-only" style="position:absolute;left:-9999px">가면력 테스트 — 나는 괜찮은 척을 얼마나 잘하는 사람일까?</h2>
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">가면력</h1>
+    <p class="sub">나는 사람 앞에서 얼마나 다른 얼굴로 살아가는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
 
-  <div id="intro" class="screen active">
-    <div class="tag">SBTI 가면력 테스트</div>
-    <h1>나는 과연<br>괜찮은 척을 잘하는 사람일까?</h1>
-    <p class="sub">8가지 상황에서 당신의 반응을 선택하면<br>당신의 가면력 유형을 알려드립니다.</p>
-    <div class="divider"></div>
-    <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
-    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
-  </div>
-
-  <div id="quiz" class="screen">
-    <div class="prog-wrap">
-      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
-      <div class="prog-label" id="prog-label">1 / 8</div>
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
     </div>
-    <div class="q-num" id="q-num">Q 1</div>
-    <div class="q-text" id="q-text"></div>
-    <div class="choices" id="choices"></div>
-    <div class="nav-row">
-      <button class="nav-btn" id="prev-btn" onclick="prevQ()" disabled>이전</button>
-      <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
-    </div>
-  </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
 
-  <div id="result" class="screen">
-    <span class="result-icon" id="r-icon"></span>
-    <div class="result-type" id="r-type"></div>
-    <div class="result-name" id="r-name"></div>
-    <div class="score-bar-wrap"><div class="score-bar-fill" id="r-bar" style="width:0%"></div></div>
-    <div class="result-desc" id="r-desc"></div>
-    <div class="traits" id="r-traits"></div>
-    <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
+
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
 
     <div class="adsense-slot adsense-inpost-bottom">
       <ins class="adsbygoogle"
@@ -86,106 +193,254 @@ h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.
            data-ad-slot="4063532035"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
 
     <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
-  </div>
+  </section>
 </div>
 
 <script>
-const qs=[
-  {q:"힘든데 누가 '괜찮아?'라고 물었다.",c:["솔직히 힘들다고 말한다.","조금 힘들다고만 말한다.","괜찮다고 웃어넘긴다.","완벽하게 아무렇지 않은 척한다."]},
-  {q:"기분이 안 좋은데 단체 모임에 갔다.",c:["표정에 티가 난다.","조금 조용해진다.","평소처럼 맞춰준다.","오히려 더 밝게 행동한다."]},
-  {q:"상처받은 말을 들었을 때",c:["그 자리에서 표현한다.","나중에 말하려고 한다.","괜찮은 척 넘긴다.","웃으면서 아무 일 아닌 것처럼 만든다."]},
-  {q:"속으로는 불안한데 일을 해야 한다.",c:["불안하다고 말한다.","조금 티가 난다.","티 안 내려고 한다.","완전히 프로처럼 버틴다."]},
-  {q:"누군가 내 약점을 건드렸다.",c:["바로 불편하다고 말한다.","표정이 굳는다.","농담처럼 넘긴다.","나도 웃으면서 분위기를 맞춘다."]},
-  {q:"혼자 있을 때와 사람들 앞에서 나는",c:["거의 비슷하다.","조금 다르다.","사람들 앞에선 밝은 편이다.","완전히 다른 사람처럼 보일 때가 있다."]},
-  {q:"속상한 일이 있어도 SNS나 단톡방에서는",c:["티가 난다.","조용해진다.","평소처럼 행동한다.","더 아무렇지 않은 척한다."]},
-  {q:"누가 내 진짜 감정을 알아차리려고 하면",c:["그냥 말한다.","조금 망설이다 말한다.","괜찮다고 막는다.","끝까지 숨기고 싶어진다."]},
-];
+  const questions = [
+    {
+      q:"사람들 앞에서 기분이 안 좋은 날이다.",
+      a:[
+        ["그냥 티가 난다",0],
+        ["조금 숨기려 한다",1],
+        ["평소처럼 보이려 한다",2],
+        ["아무 일 없는 사람처럼 완벽히 연기한다",3]
+      ]
+    },
+    {
+      q:"싫은 사람을 마주쳤다.",
+      a:[
+        ["표정 관리가 어렵다",0],
+        ["가볍게 인사만 한다",1],
+        ["적당히 웃으며 대한다",2],
+        ["속마음과 완전히 다른 얼굴이 나온다",3]
+      ]
+    },
+    {
+      q:"회사나 모임에서 내 역할은?",
+      a:[
+        ["있는 그대로 있는 편이다",0],
+        ["조금 맞춘다",1],
+        ["상황에 맞는 모습으로 바꾼다",2],
+        ["장소마다 다른 내가 출근한다",3]
+      ]
+    },
+    {
+      q:"상대 말이 마음에 안 든다.",
+      a:[
+        ["티가 조금 난다",0],
+        ["표정을 숨기려 한다",1],
+        ["웃으면서 넘긴다",2],
+        ["속으로는 싫은데 겉으론 다정하다",3]
+      ]
+    },
+    {
+      q:"낯선 사람들과 함께 있다.",
+      a:[
+        ["그냥 내 모습대로 있는다",0],
+        ["조금 조심한다",1],
+        ["좋아 보이는 모습을 만든다",2],
+        ["사회용 캐릭터를 꺼낸다",3]
+      ]
+    },
+    {
+      q:"친하지 않은 사람이 고민을 말한다.",
+      a:[
+        ["있는 그대로 반응한다",0],
+        ["예의 있게 듣는다",1],
+        ["공감하는 척을 조금 한다",2],
+        ["내 감정보다 상대가 원하는 얼굴을 한다",3]
+      ]
+    },
+    {
+      q:"모임이 끝나고 집에 왔다.",
+      a:[
+        ["그냥 하루였다",0],
+        ["조금 피곤하다",1],
+        ["사람들 앞 모습이 피곤했다",2],
+        ["가면 벗는 순간 완전히 방전된다",3]
+      ]
+    },
+    {
+      q:"내 사회적 얼굴은?",
+      a:[
+        ["거의 그대로다",0],
+        ["조금 다르다",1],
+        ["상황마다 꽤 다르다",2],
+        ["사람마다 버전이 따로 있다",3]
+      ]
+    }
+  ];
 
-const results=[
-  {min:0,max:6,icon:"🌿",type:"솔직 표현형",name:"가면이 얇은 사람",desc:"감정을 숨기기보다 있는 그대로 표현하는 타입입니다. 힘들면 힘들다고 말하고, 불편하면 불편하다고 드러낼 수 있습니다. 덕분에 감정이 크게 쌓이지 않는 편입니다.",traits:["감정 표현 빠름","솔직한 편","쌓아두기 적음","티가 잘 남"]},
-  {min:7,max:12,icon:"🙂",type:"보통 사회형",name:"상황 따라 가면 쓰는 사람",desc:"감정을 모두 드러내지는 않지만, 완전히 숨기지도 않는 타입입니다. 상황에 맞게 적당히 조절하고, 필요한 순간에는 솔직하게 말할 수도 있습니다. 가장 현실적인 가면력 유형입니다.",traits:["상황 조절형","적당히 숨김","사회성 있음","균형감 있음"]},
-  {min:13,max:18,icon:"🎭",type:"괜찮은 척형",name:"속마음을 잘 숨기는 사람",desc:"힘들어도 겉으로는 괜찮은 척하는 데 익숙한 타입입니다. 주변 사람들은 잘 모를 수 있지만, 속으로는 이미 많은 감정을 정리하고 있을 가능성이 큽니다. 혼자 버티는 시간이 길어질 수 있습니다.",traits:["감정 숨김","괜찮은 척 잘함","혼자 정리함","속마음 복잡함"]},
-  {min:19,max:24,icon:"🕶️",type:"가면 MAX형",name:"아무렇지 않은 척의 달인",desc:"속과 겉이 꽤 다를 수 있는 타입입니다. 상처받아도 웃고, 불안해도 태연한 척하고, 무너져도 아무렇지 않은 얼굴을 유지하려 합니다. 강해 보이지만 혼자 있을 때 에너지가 크게 빠질 수 있습니다.",traits:["표정 관리 강함","감정 은폐 능숙","혼자 지침","겉과 속 차이 큼"]},
-];
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"🙂",
+      type:"있는 그대로형",
+      name:"가면보다 표정이 먼저인 사람",
+      desc:"당신은 사람들 앞에서 자신을 크게 꾸미지 않는다. 기분이 좋으면 좋은 대로, 불편하면 불편한 대로 어느 정도 드러난다. 사회생활이 서툰 게 아니라, 꾸며낸 얼굴로 오래 버티는 것을 좋아하지 않는 사람이다.",
+      traits:["감정이 비교적 솔직하게 드러남","상황에 맞춰 과하게 변하지 않음","있는 그대로의 관계를 선호함","사회적 연기가 많지 않음"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"😌",
+      type:"기본 예의형",
+      name:"필요한 만큼만 표정 관리하는 사람",
+      desc:"당신은 필요한 자리에서는 어느 정도 표정을 관리한다. 싫어도 대놓고 티 내지 않고, 기분이 나빠도 최소한의 예의는 지킨다. 다만 집에 돌아와도 내가 사라졌다는 느낌까지는 들지 않는다.",
+      traits:["기본적인 표정 관리가 가능함","예의상 웃을 줄 앎","상황에 맞춰 적당히 조절함","사회적 피로가 아주 크진 않음"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"🎭",
+      type:"상황별 얼굴형",
+      name:"장소마다 다른 버전으로 사는 사람",
+      desc:"당신은 사람과 장소에 따라 얼굴이 꽤 달라진다. 회사의 나, 친구 앞의 나, 낯선 사람 앞의 나가 조금씩 다르다. 잘 맞추는 능력이 있지만, 가끔은 진짜 내 표정이 어디 있었는지 헷갈릴 때도 있다.",
+      traits:["상황별 태도 전환이 빠름","표정과 말투를 잘 조절함","사람마다 다른 버전이 있음","사회적 피로가 쌓이기 쉬움"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"🫥",
+      type:"가면 고정형",
+      name:"사회용 얼굴이 본체처럼 된 사람",
+      desc:"당신은 사람들 앞에서 감정을 꽤 깊게 숨긴다. 싫어도 웃고, 힘들어도 괜찮은 척하고, 불편해도 부드럽게 말한다. 그 가면은 당신을 지켜주기도 하지만, 너무 오래 쓰면 집에 와서 내가 텅 빈 느낌이 들 수 있다.",
+      traits:["속마음과 겉표정이 자주 다름","사회용 얼굴을 오래 유지함","싫어도 웃는 일이 많음","혼자 있을 때 크게 방전됨"]
+    }
+  ];
 
-let cur=0,scores=Array(qs.length).fill(-1);
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+  let finalResultIndex = null;
 
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function startQuiz(){
-  cur=0;
-  scores=Array(qs.length).fill(-1);
-  renderQ();
-  show('quiz');
-}
-
-function renderQ(){
-  const q=qs[cur];
-  document.getElementById('prog').style.width=((cur+1)/qs.length*100)+'%';
-  document.getElementById('prog-label').textContent=(cur+1)+' / '+qs.length;
-  document.getElementById('q-num').textContent='Q '+(cur+1);
-  document.getElementById('q-text').textContent=q.q;
-  const ch=document.getElementById('choices');
-  ch.innerHTML='';
-  q.c.forEach((c,i)=>{
-    const btn=document.createElement('button');
-    btn.className='choice'+(scores[cur]===i?' selected':'');
-    btn.textContent=c;
-    btn.onclick=()=>pick(i);
-    ch.appendChild(btn);
-  });
-  document.getElementById('prev-btn').disabled=cur===0;
-  document.getElementById('next-btn').disabled=scores[cur]===-1;
-  document.getElementById('next-btn').textContent=cur===qs.length-1?'결과 보기':'다음';
-}
-
-function pick(i){
-  scores[cur]=i;
-  document.querySelectorAll('.choice').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
-  document.getElementById('next-btn').disabled=false;
-}
-
-function prevQ(){
-  if(cur>0){
-    cur--;
-    renderQ();
+  function startQuiz(){
+    history.replaceState(null, "", location.pathname);
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
   }
-}
 
-function nextQ(){
-  if(scores[cur]===-1)return;
-  if(cur<qs.length-1){
-    cur++;
-    renderQ();
-  }else{
-    showResult();
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
+
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
+
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
   }
-}
 
-function showResult(){
-  const total=scores.reduce((a,b)=>a+b,0);
-  const r=results.find(x=>total>=x.min&&total<=x.max);
-  document.getElementById('r-icon').textContent=r.icon;
-  document.getElementById('r-type').textContent=r.type;
-  document.getElementById('r-name').textContent=r.name;
-  document.getElementById('r-desc').textContent=r.desc;
-  const tr=document.getElementById('r-traits');
-  tr.innerHTML=r.traits.map(t=>`<div class="trait"><strong>특징</strong>${t}</div>`).join('');
-  show('result');
-  setTimeout(()=>{document.getElementById('r-bar').style.width=Math.round(total/24*100)+'%'},100);
-}
+  function selectAnswer(point){
+    score += point;
+    current++;
 
-function restart(){
-  cur=0;
-  scores=Array(qs.length).fill(-1);
-  document.getElementById('r-bar').style.width='0%';
-  show('intro');
-}
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
+
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    finalResultIndex = results.findIndex(r => score >= r.min && score <= r.max);
+    finalResult = results[finalResultIndex];
+
+    renderResult(finalResult);
+  }
+
+  function renderResult(resultData){
+    document.getElementById("resultIcon").innerText = resultData.icon;
+    document.getElementById("resultType").innerText = resultData.type;
+    document.getElementById("resultName").innerText = resultData.name;
+    document.getElementById("resultDesc").innerText = resultData.desc;
+
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
+
+    resultData.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
+
+  function openSharedResult(){
+    const params = new URLSearchParams(location.search);
+    const resultParam = params.get("r");
+
+    if(resultParam === null) return;
+
+    const index = Number(resultParam);
+
+    if(Number.isNaN(index) || !results[index]) return;
+
+    finalResultIndex = index;
+    finalResult = results[index];
+
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    renderResult(finalResult);
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    finalResultIndex = null;
+
+    history.replaceState(null, "", location.pathname);
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const testName = document.querySelector(".title")?.innerText || "SBTI";
+    const pageUrl = `${location.origin}${location.pathname}?r=${finalResultIndex}`;
+
+    const shareText =
+`SBTI ${testName} 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
+
+    if(navigator.share){
+      navigator.share({
+        title:`SBTI ${testName} 테스트`,
+        text:shareText
+      });
+    }else{
+      navigator.clipboard.writeText(shareText);
+      alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", openSharedResult);
 </script>
