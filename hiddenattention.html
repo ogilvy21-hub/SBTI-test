@@ -320,9 +320,12 @@
   let current = 0;
   let score = 0;
   let finalResult = null;
+  let finalResultIndex = null;
 
   function startQuiz(){
+    history.replaceState(null, "", location.pathname);
     document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
     document.getElementById("quiz").classList.remove("hidden");
     showQuestion();
   }
@@ -359,18 +362,25 @@
   function showResult(){
     document.getElementById("bar").style.width = "100%";
     document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.add("hidden");
     document.getElementById("result").classList.remove("hidden");
 
-    finalResult = results.find(r => score >= r.min && score <= r.max);
+    finalResultIndex = results.findIndex(r => score >= r.min && score <= r.max);
+    finalResult = results[finalResultIndex];
 
-    document.getElementById("resultIcon").innerText = finalResult.icon;
-    document.getElementById("resultType").innerText = finalResult.type;
-    document.getElementById("resultName").innerText = finalResult.name;
-    document.getElementById("resultDesc").innerText = finalResult.desc;
+    renderResult(finalResult);
+  }
+
+  function renderResult(resultData){
+    document.getElementById("resultIcon").innerText = resultData.icon;
+    document.getElementById("resultType").innerText = resultData.type;
+    document.getElementById("resultName").innerText = resultData.name;
+    document.getElementById("resultDesc").innerText = resultData.desc;
 
     const traits = document.getElementById("traits");
     traits.innerHTML = "";
-    finalResult.traits.forEach(t => {
+
+    resultData.traits.forEach(t => {
       const div = document.createElement("div");
       div.className = "trait";
       div.innerText = t;
@@ -378,27 +388,59 @@
     });
   }
 
+  function openSharedResult(){
+    const params = new URLSearchParams(location.search);
+    const resultParam = params.get("r");
+
+    if(resultParam === null) return;
+
+    const index = Number(resultParam);
+
+    if(Number.isNaN(index) || !results[index]) return;
+
+    finalResultIndex = index;
+    finalResult = results[index];
+
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    renderResult(finalResult);
+  }
+
   function restartQuiz(){
     current = 0;
     score = 0;
     finalResult = null;
+    finalResultIndex = null;
+
+    history.replaceState(null, "", location.pathname);
+
     document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
     document.getElementById("intro").classList.remove("hidden");
   }
 
   function shareResult(){
-    const text = `SBTI 관종숨김력 테스트 결과: ${finalResult.name}`;
-    const url = location.href;
+    const testName = document.querySelector(".title")?.innerText || "SBTI";
+    const pageUrl = `${location.origin}${location.pathname}?r=${finalResultIndex}`;
+
+    const shareText =
+`SBTI ${testName} 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
 
     if(navigator.share){
       navigator.share({
-        title:"SBTI 관종숨김력 테스트",
-        text:text,
-        url:url
+        title:`SBTI ${testName} 테스트`,
+        text:shareText
       });
     }else{
-      navigator.clipboard.writeText(`${text}\n${url}`);
-      alert("결과 링크가 복사됐습니다.");
+      navigator.clipboard.writeText(shareText);
+      alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
     }
   }
+
+  window.addEventListener("DOMContentLoaded", openSharedResult);
 </script>
