@@ -1,0 +1,404 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
+</style>
+
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">눈물참기력</h1>
+    <p class="sub">나는 울고 싶을 때 얼마나 티 안 내는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
+
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
+</div>
+
+<script>
+  const questions = [
+    {
+      q:"갑자기 서운한 말을 들었다.",
+      a:[
+        ["그냥 넘긴다",0],
+        ["살짝 마음이 쓰인다",1],
+        ["눈가가 뜨거워진다",2],
+        ["이미 목소리가 먼저 떨린다",3]
+      ]
+    },
+    {
+      q:"누가 다정하게 위로해줬다.",
+      a:[
+        ["고맙다고 한다",0],
+        ["마음이 조금 풀린다",1],
+        ["눈물이 살짝 돈다",2],
+        ["괜찮다는 말 하다가 무너진다",3]
+      ]
+    },
+    {
+      q:"혼자 힘든 하루를 버텼다.",
+      a:[
+        ["그냥 잔다",0],
+        ["조금 지친다",1],
+        ["씻다가 울컥한다",2],
+        ["불 끄면 바로 눈물 버튼이다",3]
+      ]
+    },
+    {
+      q:"감동적인 장면을 봤다.",
+      a:[
+        ["담담하게 본다",0],
+        ["조금 찡하다",1],
+        ["눈물이 고인다",2],
+        ["눈물 참느라 턱에 힘이 들어간다",3]
+      ]
+    },
+    {
+      q:"사람들 앞에서 울 것 같을 때 나는?",
+      a:[
+        ["잘 참는다",0],
+        ["고개를 돌린다",1],
+        ["눈을 크게 뜬다",2],
+        ["천장 보고 물리적으로 막는다",3]
+      ]
+    },
+    {
+      q:"억울한 상황이 생겼다.",
+      a:[
+        ["차분히 말한다",0],
+        ["말투가 조금 흔들린다",1],
+        ["눈물이 날까 봐 말이 줄어든다",2],
+        ["화난 건데 눈물부터 나온다",3]
+      ]
+    },
+    {
+      q:"누가 '괜찮아?'라고 물었다.",
+      a:[
+        ["응 괜찮아 한다",0],
+        ["잠깐 멈춘다",1],
+        ["그 말에 더 흔들린다",2],
+        ["그 질문이 눈물 스위치다",3]
+      ]
+    },
+    {
+      q:"내 눈물 참기 방식은?",
+      a:[
+        ["감정 조절이 잘 된다",0],
+        ["대부분 참는다",1],
+        ["참지만 티가 난다",2],
+        ["참는 동안 얼굴 전체가 싸운다",3]
+      ]
+    }
+  ];
+
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"🙂",
+      type:"담담 생존형",
+      name:"눈물보다 정리가 먼저인 사람",
+      desc:"당신은 쉽게 무너지지 않는다. 속상한 일이 있어도 감정이 바로 밖으로 나오기보다 머릿속에서 먼저 정리된다. 차가운 사람이 아니라, 울기 전에 상황을 이해하려는 쪽에 가깝다.",
+      traits:["감정이 바로 밖으로 새지 않음","사람들 앞에서 비교적 담담함","울컥해도 금방 정리함","눈물보다 생각이 먼저 움직임"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"😌",
+      type:"살짝 울컥형",
+      name:"참긴 참는데 목소리가 흔들리는 사람",
+      desc:"당신은 웬만하면 눈물을 참는다. 다만 다정한 말, 억울한 상황, 갑작스러운 위로 앞에서는 마음이 살짝 흔들린다. 눈물은 참아도 목소리와 눈빛이 먼저 마음을 들킨다.",
+      traits:["눈물은 참지만 티가 조금 남","위로에 약한 편","억울하면 말이 줄어듦","혼자 있을 때 감정이 풀림"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"🥹",
+      type:"눈가 비상형",
+      name:"괜찮다고 말하면 더 울 것 같은 사람",
+      desc:"당신은 감정을 오래 눌러두다가 작은 말 한마디에 흔들린다. 괜찮냐는 질문, 따뜻한 위로, 혼자 남은 밤이 눈물의 문을 연다. 울기 싫어서 참지만, 마음은 이미 조금씩 젖어 있다.",
+      traits:["괜찮냐는 말에 약함","참다가 혼자 울컥함","감동과 억울함에 쉽게 흔들림","눈물 참는 표정이 티 남"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"😭",
+      type:"눈물 자동문형",
+      name:"눈물샘이 감정 출입문인 사람",
+      desc:"당신은 감정이 깊게 들어오면 눈물이 먼저 반응한다. 화가 나도 울고, 고마워도 울고, 서러워도 운다. 약해서가 아니라 마음이 몸보다 빠르게 차오르는 사람이다.",
+      traits:["감정이 눈물로 빠르게 나옴","억울하면 말보다 눈물이 먼저 남","위로받으면 더 울컥함","혼자 있으면 감정이 크게 풀림"]
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+
+  function startQuiz(){
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
+
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
+
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(point){
+    score += point;
+    current++;
+
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
+
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    finalResult = results.find(r => score >= r.min && score <= r.max);
+
+    document.getElementById("resultIcon").innerText = finalResult.icon;
+    document.getElementById("resultType").innerText = finalResult.type;
+    document.getElementById("resultName").innerText = finalResult.name;
+    document.getElementById("resultDesc").innerText = finalResult.desc;
+
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
+    finalResult.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const text = `SBTI 눈물참기력 테스트 결과: ${finalResult.name}`;
+    const url = location.href;
+
+    if(navigator.share){
+      navigator.share({
+        title:"SBTI 눈물참기력 테스트",
+        text:text,
+        url:url
+      });
+    }else{
+      navigator.clipboard.writeText(`${text}\n${url}`);
+      alert("결과 링크가 복사됐습니다.");
+    }
+  }
+</script>
