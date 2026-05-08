@@ -2,572 +2,445 @@
         crossorigin="anonymous"></script>
 
 <style>
-:root{
-  --font-sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;
-  --color-background-primary:#fff;
-  --color-background-secondary:#f5f5f5;
-  --color-background-danger:#fff1f2;
-
-  --color-text-primary:#111;
-  --color-text-secondary:#555;
-  --color-text-tertiary:#888;
-  --color-text-danger:#e11d48;
-
-  --color-border-primary:#222;
-  --color-border-secondary:#d9d9d9;
-  --color-border-tertiary:#e5e5e5;
-  --color-border-danger:#f43f5e;
-
-  --border-radius-lg:16px;
-  --border-radius-md:12px;
-}
-
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-  font-family:var(--font-sans);
-  background:#f3f3f3;
-}
-
-#app{
-  max-width:560px;
-  margin:0 auto;
-  padding:1.5rem 1rem;
-}
-
-.screen{display:none}
-.screen.active{display:block}
-
-.tag{
-  display:inline-block;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.08em;
-  padding:4px 10px;
-  border-radius:20px;
-  background:#fff1f2;
-  color:#e11d48;
-  margin-bottom:1rem;
-}
-
-h1{
-  font-size:30px;
-  line-height:1.2;
-  margin-bottom:.8rem;
-}
-
-.sub{
-  font-size:15px;
-  color:#555;
-  line-height:1.6;
-  margin-bottom:1.5rem;
-}
-
-.divider{
-  height:1px;
-  background:#ddd;
-  margin:1.3rem 0;
-}
-
-.start-btn,
-.retry-btn{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:16px;
-  background:#111;
-  color:#fff;
-  font-size:15px;
-  cursor:pointer;
-}
-
-.prog-wrap{margin-bottom:1.4rem}
-
-.prog-bar{
-  height:6px;
-  background:#e8e8e8;
-  border-radius:999px;
-  overflow:hidden;
-}
-
-.prog-fill{
-  height:100%;
-  width:0%;
-  background:#e11d48;
-  transition:.25s;
-}
-
-.prog-label{
-  margin-top:.5rem;
-  font-size:12px;
-  color:#777;
-}
-
-.q-num{
-  font-size:12px;
-  color:#e11d48;
-  margin-bottom:.4rem;
-}
-
-.q-text{
-  font-size:22px;
-  line-height:1.45;
-  margin-bottom:1.2rem;
-}
-
-.choices{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.choice{
-  width:100%;
-  text-align:left;
-  border:1px solid #ddd;
-  background:#fff;
-  padding:15px;
-  border-radius:16px;
-  font-size:15px;
-  line-height:1.5;
-  cursor:pointer;
-  transition:.15s;
-}
-
-.choice:hover{
-  border-color:#f43f5e;
-  background:#fff1f2;
-}
-
-.choice.selected{
-  border-color:#e11d48;
-  background:#fff1f2;
-}
-
-.nav-row{
-  display:flex;
-  gap:10px;
-  margin-top:1.2rem;
-}
-
-.nav-btn{
-  flex:1;
-  padding:13px;
-  border-radius:14px;
-  border:none;
-  background:#e8e8e8;
-  cursor:pointer;
-}
-
-.nav-btn.next{
-  background:#111;
-  color:#fff;
-}
-
-.result-icon{
-  display:block;
-  text-align:center;
-  font-size:54px;
-  margin-bottom:1rem;
-}
-
-.result-type{
-  text-align:center;
-  font-size:14px;
-  color:#e11d48;
-  margin-bottom:.4rem;
-  font-weight:600;
-}
-
-.result-name{
-  text-align:center;
-  font-size:40px;
-  margin-bottom:1rem;
-  font-weight:700;
-}
-
-.score-bar-wrap{
-  width:100%;
-  height:14px;
-  border-radius:999px;
-  background:#ececec;
-  overflow:hidden;
-  margin-bottom:1.5rem;
-}
-
-.score-bar-fill{
-  height:100%;
-  width:0%;
-  background:#e11d48;
-  transition:1s;
-}
-
-.result-desc{
-  background:#f5f5f5;
-  border-radius:20px;
-  padding:1.5rem;
-  line-height:1.8;
-  color:#555;
-  font-size:15px;
-  margin-bottom:1.5rem;
-}
-
-.traits{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:1.5rem;
-}
-
-.trait{
-  background:#fff;
-  border:1px solid #e5e5e5;
-  border-radius:16px;
-  padding:14px;
-  font-size:15px;
-  color:#444;
-}
-
-.trait strong{
-  display:block;
-  color:#888;
-  font-size:12px;
-  margin-bottom:5px;
-}
-
-.home-link{
-  display:inline-block;
-  margin-top:1rem;
-  font-size:13px;
-  color:#888;
-  text-decoration:none;
-}
-
-.adsense-inpost-bottom{
-  margin:24px 0 8px;
-}
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
 </style>
 
-<div id="app">
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">과몰입력</h1>
+    <p class="sub">나는 좋아하는 것에 얼마나 깊게 빠져드는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
 
-<div id="intro" class="screen active">
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
 
-  <div class="tag">SBTI 과몰입력 테스트</div>
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
 
-  <h1>나는 얼마나 쉽게<br>감정에 과몰입할까?</h1>
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
 
-  <p class="sub">
-    드라마 한 편 보고 하루 종일 여운 남는 사람.<br>
-    연락 하나에도 혼자 세계관 만드는 사람.<br><br>
-    당신의 과몰입력을 확인해보세요.
-  </p>
-
-  <div class="divider"></div>
-
-  <button class="start-btn" onclick="startQuiz()">테스트 시작하기</button>
-
-  <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
-
-</div>
-
-<div id="quiz" class="screen">
-
-  <div class="prog-wrap">
-    <div class="prog-bar">
-      <div class="prog-fill" id="prog"></div>
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
 
-    <div class="prog-label" id="prog-label">1 / 8</div>
-  </div>
-
-  <div class="q-num" id="q-num"></div>
-  <div class="q-text" id="q-text"></div>
-
-  <div class="choices" id="choices"></div>
-
-  <div class="nav-row">
-    <button class="nav-btn" onclick="prevQ()">이전</button>
-    <button class="nav-btn next" id="next-btn" onclick="nextQ()" disabled>다음</button>
-  </div>
-
-</div>
-
-<div id="result" class="screen">
-
-  <span class="result-icon" id="r-icon"></span>
-
-  <div class="result-type" id="r-type"></div>
-
-  <div class="result-name" id="r-name"></div>
-
-  <div class="score-bar-wrap">
-    <div class="score-bar-fill" id="r-bar"></div>
-  </div>
-
-  <div class="result-desc" id="r-desc"></div>
-
-  <div class="traits" id="r-traits"></div>
-
-  <button class="retry-btn" onclick="restart()">다시 테스트하기</button>
-
-  <div class="adsense-slot adsense-inpost-bottom">
-    <ins class="adsbygoogle"
-         style="display:block; width:100%;"
-         data-ad-client="ca-pub-6295549457389423"
-         data-ad-slot="4063532035"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-
-  <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
-
-</div>
-
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
 </div>
 
 <script>
-const questions = [
+  const questions = [
+    {
+      q:"재밌는 드라마를 보기 시작했다.",
+      a:[
+        ["한두 편만 본다",0],
+        ["시간 나면 이어 본다",1],
+        ["계속 생각난다",2],
+        ["하루 만에 세계관 입주 완료다",3]
+      ]
+    },
+    {
+      q:"좋아하는 노래가 생겼다.",
+      a:[
+        ["가끔 듣는다",0],
+        ["자주 듣는다",1],
+        ["반복 재생한다",2],
+        ["가사 해석까지 들어간다",3]
+      ]
+    },
+    {
+      q:"관심 있는 사람이나 캐릭터가 생겼다.",
+      a:[
+        ["그냥 호감이다",0],
+        ["조금 찾아본다",1],
+        ["관련 정보를 꽤 본다",2],
+        ["이미 과거 행적까지 정리한다",3]
+      ]
+    },
+    {
+      q:"마음에 드는 콘텐츠를 발견했다.",
+      a:[
+        ["즐기고 끝낸다",0],
+        ["다음 것도 본다",1],
+        ["관련 추천을 찾아본다",2],
+        ["알고리즘에게 내 인생을 맡긴다",3]
+      ]
+    },
+    {
+      q:"누가 내가 좋아하는 걸 같이 좋아한다.",
+      a:[
+        ["반갑다",0],
+        ["대화가 즐겁다",1],
+        ["갑자기 말이 많아진다",2],
+        ["그 순간부터 발표회가 열린다",3]
+      ]
+    },
+    {
+      q:"좋아하는 것에 문제가 생겼다.",
+      a:[
+        ["그럴 수 있다",0],
+        ["조금 아쉽다",1],
+        ["마음이 꽤 쓰인다",2],
+        ["내 일처럼 감정이 흔들린다",3]
+      ]
+    },
+    {
+      q:"관심사가 바뀌면 나는?",
+      a:[
+        ["조용히 바뀐다",0],
+        ["한동안 좋아한다",1],
+        ["꽤 깊게 파고든다",2],
+        ["그때마다 새 인생 장르가 열린다",3]
+      ]
+    },
+    {
+      q:"내 과몰입 방식은?",
+      a:[
+        ["가볍게 즐긴다",0],
+        ["적당히 빠진다",1],
+        ["꽤 깊게 들어간다",2],
+        ["좋아하면 생활 전체가 물든다",3]
+      ]
+    }
+  ];
 
-{
-q:"드라마나 영화 결말 여운이 오래 간다.",
-a:[
-["거의 없다",0],
-["조금 남는다",1],
-["하루 정도 간다",2],
-["며칠 동안 계속 생각난다",3]
-]
-},
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"🙂",
+      type:"가벼운 감상형",
+      name:"좋아해도 거리 유지하는 사람",
+      desc:"당신은 좋아하는 것이 생겨도 삶 전체를 넘겨주지는 않는다. 재밌으면 즐기고, 좋으면 듣고, 끝나면 일상으로 돌아온다. 애정이 얕은 게 아니라 감정의 거리를 안정적으로 유지하는 사람이다.",
+      traits:["관심사를 가볍게 즐김","일상으로 돌아오는 속도가 빠름","정보 탐색이 과하지 않음","취향과 생활의 경계가 있음"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"😌",
+      type:"적당 몰입형",
+      name:"좋아하면 조금 더 찾아보는 사람",
+      desc:"당신은 마음에 드는 것이 생기면 자연스럽게 더 찾아본다. 노래를 반복해서 듣고, 드라마 다음 편을 기다리고, 관련 이야기를 보면 반가워한다. 다만 과몰입이 일상을 크게 흔들지는 않는다.",
+      traits:["좋아하는 걸 자주 찾아봄","반복 감상이 있는 편","관심사 이야기에 반응함","몰입과 일상의 균형이 있음"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"💘",
+      type:"깊은 몰입형",
+      name:"좋아하면 세계관까지 들어가는 사람",
+      desc:"당신은 좋아하는 것이 생기면 꽤 깊게 들어간다. 인물, 서사, 배경, 관련 콘텐츠까지 자연스럽게 따라간다. 그 대상이 하루의 기분을 바꾸고, 대화 주제가 되고, 쉬는 시간의 중심이 된다.",
+      traits:["관심사를 깊게 파고듦","관련 정보를 계속 찾아봄","좋아하는 이야기를 오래 함","감정이 대상에 크게 연결됨"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"🌀",
+      type:"과몰입 풀충전형",
+      name:"좋아하면 인생 장르가 바뀌는 사람",
+      desc:"당신은 좋아하는 대상이 생기면 삶의 배경음악이 바뀐다. 콘텐츠 하나가 하루를 차지하고, 캐릭터 하나가 기분을 흔들고, 노래 한 곡이 계절을 바꾼다. 과몰입은 당신에게 취미가 아니라 잠시 사는 세계다.",
+      traits:["좋아하는 것에 생활이 물듦","세계관과 서사를 크게 즐김","감정 이입이 매우 빠름","관심사가 하루 기분을 좌우함"]
+    }
+  ];
 
-{
-q:"좋아하는 사람이 무심한 말 한마디 했다.",
-a:[
-["금방 잊는다",0],
-["조금 신경 쓰인다",1],
-["혼자 의미를 생각한다",2],
-["머릿속에서 장면이 반복된다",3]
-]
-},
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+  let finalResultIndex = null;
 
-{
-q:"웹툰·연애프로·예능 볼 때",
-a:[
-["가볍게 본다",0],
-["조금 감정 이입한다",1],
-["상당히 몰입한다",2],
-["거의 내 일처럼 본다",3]
-]
-},
-
-{
-q:"누가 나를 칭찬했다.",
-a:[
-["좋네 하고 끝",0],
-["기분 좋다",1],
-["하루 종일 생각난다",2],
-["혼자 서사까지 만든다",3]
-]
-},
-
-{
-q:"연락 답장이 늦어졌다.",
-a:[
-["별 생각 없다",0],
-["조금 궁금하다",1],
-["혼자 이유를 상상한다",2],
-["이미 결말까지 갔다",3]
-]
-},
-
-{
-q:"좋아하는 취미나 콘텐츠가 생기면",
-a:[
-["가볍게 즐긴다",0],
-["조금 빠진다",1],
-["꽤 깊게 판다",2],
-["생활 전체가 그걸 중심으로 돈다",3]
-]
-},
-
-{
-q:"사람 관계에서 나는",
-a:[
-["거리를 잘 둔다",0],
-["적당히 정 준다",1],
-["감정이 깊은 편이다",2],
-["한 번 빠지면 진짜 깊다",3]
-]
-},
-
-{
-q:"혼자 상상하는 시간이",
-a:[
-["거의 없다",0],
-["가끔 있다",1],
-["꽤 많다",2],
-["하루 상당 부분 차지한다",3]
-]
-}
-
-];
-
-const results = [
-
-{
-min:0,max:5,
-icon:"🪨",
-type:"현실 유지형",
-name:"과몰입 거의 없음",
-desc:"감정과 현실의 거리를 잘 유지하는 타입입니다. 쉽게 빠지지 않고, 상황을 비교적 차분하게 바라보는 편입니다.",
-traits:["현실 감각 강함","감정 정리 빠름","거리 조절 가능","담백한 편"]
-},
-
-{
-min:6,max:11,
-icon:"🙂",
-type:"적당 몰입형",
-name:"가끔 과몰입하는 사람",
-desc:"좋아하는 것에는 몰입하지만, 어느 정도 선은 유지하는 타입입니다. 공감 능력도 있고 감정도 풍부하지만 현실도 놓치지 않습니다.",
-traits:["균형감 있음","공감 능력 좋음","몰입과 현실 공존","감정 건강형"]
-},
-
-{
-min:12,max:17,
-icon:"🌙",
-type:"감정 과몰입형",
-name:"혼자 세계관 만드는 사람",
-desc:"작은 감정도 깊게 받아들이고 오래 생각하는 타입입니다. 관계, 콘텐츠, 말투 하나에도 마음이 크게 움직이는 편입니다.",
-traits:["여운 오래 감","상상력 풍부","감정 깊음","혼자 생각 많음"]
-},
-
-{
-min:18,max:24,
-icon:"🔥",
-type:"과몰입 MAX형",
-name:"혼자 드라마 찍는 사람",
-desc:"감정에 완전히 몰입하는 타입입니다. 좋아하는 것에는 깊게 빠지고, 작은 신호에도 큰 의미를 부여할 가능성이 큽니다.",
-traits:["몰입 강도 높음","감정 진폭 큼","상상 과다","여운 매우 김"]
-}
-
-];
-
-let current = 0;
-let scores = [];
-
-function startQuiz(){
-  current = 0;
-  scores = [];
-  showScreen("quiz");
-  renderQuestion();
-}
-
-function renderQuestion(){
-
-  const q = questions[current];
-
-  document.getElementById("prog").style.width =
-    ((current)/questions.length)*100 + "%";
-
-  document.getElementById("prog-label").innerText =
-    (current+1)+" / "+questions.length;
-
-  document.getElementById("q-num").innerText =
-    "Q"+(current+1);
-
-  document.getElementById("q-text").innerText = q.q;
-
-  const wrap = document.getElementById("choices");
-  wrap.innerHTML = "";
-
-  q.a.forEach((item)=>{
-
-    const btn = document.createElement("button");
-
-    btn.className = "choice";
-
-    btn.innerText = item[0];
-
-    btn.onclick = ()=>{
-
-      document.querySelectorAll(".choice")
-        .forEach(el=>el.classList.remove("selected"));
-
-      btn.classList.add("selected");
-
-      scores[current] = item[1];
-
-      document.getElementById("next-btn").disabled = false;
-    };
-
-    wrap.appendChild(btn);
-  });
-
-  document.getElementById("next-btn").disabled = true;
-}
-
-function nextQ(){
-
-  if(current < questions.length-1){
-
-    current++;
-    renderQuestion();
-
-  }else{
-
-    showResult();
+  function startQuiz(){
+    history.replaceState(null, "", location.pathname);
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
   }
-}
 
-function prevQ(){
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
 
-  if(current===0)return;
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
 
-  current--;
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
 
-  renderQuestion();
-}
+  function selectAnswer(point){
+    score += point;
+    current++;
 
-function showResult(){
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
 
-  const total = scores.reduce((a,b)=>a+b,0);
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
 
-  const result = results.find(r =>
-    total >= r.min && total <= r.max
-  );
+    finalResultIndex = results.findIndex(r => score >= r.min && score <= r.max);
+    finalResult = results[finalResultIndex];
 
-  showScreen("result");
+    renderResult(finalResult);
+  }
 
-  document.getElementById("r-icon").innerText = result.icon;
-  document.getElementById("r-type").innerText = result.type;
-  document.getElementById("r-name").innerText = result.name;
-  document.getElementById("r-desc").innerText = result.desc;
+  function renderResult(resultData){
+    document.getElementById("resultIcon").innerText = resultData.icon;
+    document.getElementById("resultType").innerText = resultData.type;
+    document.getElementById("resultName").innerText = resultData.name;
+    document.getElementById("resultDesc").innerText = resultData.desc;
 
-  document.getElementById("r-bar").style.width =
-    ((total/24)*100)+"%";
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
 
-  document.getElementById("r-traits").innerHTML =
-    result.traits.map(t=>`
-      <div class="trait">
-        <strong>특징</strong>
-        ${t}
-      </div>
-    `).join("");
-}
+    resultData.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
 
-function restart(){
+  function openSharedResult(){
+    const params = new URLSearchParams(location.search);
+    const resultParam = params.get("r");
 
-  showScreen("intro");
-}
+    if(resultParam === null) return;
 
-function showScreen(id){
+    const index = Number(resultParam);
 
-  document.querySelectorAll(".screen")
-    .forEach(el=>el.classList.remove("active"));
+    if(Number.isNaN(index) || !results[index]) return;
 
-  document.getElementById(id)
-    .classList.add("active");
-}
+    finalResultIndex = index;
+    finalResult = results[index];
+
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    renderResult(finalResult);
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    finalResultIndex = null;
+
+    history.replaceState(null, "", location.pathname);
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const testName = document.querySelector(".title")?.innerText || "SBTI";
+    const pageUrl = `${location.origin}${location.pathname}?r=${finalResultIndex}`;
+
+    const shareText =
+`SBTI ${testName} 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
+
+    if(navigator.share){
+      navigator.share({
+        title:`SBTI ${testName} 테스트`,
+        text:shareText
+      });
+    }else{
+      navigator.clipboard.writeText(shareText);
+      alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", openSharedResult);
 </script>
