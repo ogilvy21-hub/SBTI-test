@@ -1,0 +1,446 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
+</style>
+
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">잠수력</h1>
+    <p class="sub">나는 연락과 현실에서 얼마나 조용히 사라지는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
+
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
+</div>
+
+<script>
+  const questions = [
+    {
+      q:"카톡 답장이 부담스러워졌다.",
+      a:[
+        ["그래도 바로 답한다",0],
+        ["조금 있다 답한다",1],
+        ["알림만 보고 미룬다",2],
+        ["그 순간 나는 세상에서 사라진다",3]
+      ]
+    },
+    {
+      q:"갑자기 약속이 귀찮아졌다.",
+      a:[
+        ["그냥 나간다",0],
+        ["조금 고민한다",1],
+        ["취소할 이유를 찾는다",2],
+        ["이미 마음은 연락두절이다",3]
+      ]
+    },
+    {
+      q:"전화가 울린다.",
+      a:[
+        ["바로 받는다",0],
+        ["상대 보고 받는다",1],
+        ["무음으로 바꾼다",2],
+        ["핸드폰과 나는 모르는 사이다",3]
+      ]
+    },
+    {
+      q:"단톡방에 말이 많아졌다.",
+      a:[
+        ["대화에 참여한다",0],
+        ["필요할 때만 말한다",1],
+        ["읽기만 한다",2],
+        ["어느 순간 존재감이 증발한다",3]
+      ]
+    },
+    {
+      q:"누가 왜 답장 안 하냐고 묻는다.",
+      a:[
+        ["미안하다고 한다",0],
+        ["바빴다고 한다",1],
+        ["못 봤다고 한다",2],
+        ["이제야 핸드폰을 본 사람처럼 행동한다",3]
+      ]
+    },
+    {
+      q:"마음이 복잡할 때 나는?",
+      a:[
+        ["누군가에게 말한다",0],
+        ["혼자 정리한 뒤 말한다",1],
+        ["연락을 줄인다",2],
+        ["잠깐 인간관계 로그아웃한다",3]
+      ]
+    },
+    {
+      q:"SNS 메시지가 쌓였다.",
+      a:[
+        ["하나씩 답한다",0],
+        ["중요한 것만 답한다",1],
+        ["보고도 미룬다",2],
+        ["앱을 안 들어가면 없는 일이다",3]
+      ]
+    },
+    {
+      q:"내 잠수 스타일은?",
+      a:[
+        ["거의 잠수 안 탄다",0],
+        ["가끔 조용해진다",1],
+        ["부담되면 사라진다",2],
+        ["잠수가 아니라 생존 방식이다",3]
+      ]
+    }
+  ];
+
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"📲",
+      type:"즉시 응답형",
+      name:"사라질 틈 없이 답장하는 사람",
+      desc:"당신은 연락을 오래 미루지 않는다. 귀찮아도 답은 하고, 부담스러워도 상황을 설명한다. 잠수보다는 대화로 정리하는 쪽에 가깝다. 주변 사람 입장에서는 가장 예측 가능한 사람이다.",
+      traits:["답장이 빠른 편","연락을 오래 쌓아두지 않음","상황 설명을 잘함","관계를 방치하지 않음"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"🙂",
+      type:"잠깐 조용형",
+      name:"사라지진 않고 흐려지는 사람",
+      desc:"당신은 가끔 연락이 늦어지지만 완전히 사라지지는 않는다. 마음의 여유가 없을 때 잠깐 조용해지고, 다시 괜찮아지면 돌아온다. 잠수라기보다는 충전 시간이 필요한 사람이다.",
+      traits:["가끔 답장이 늦음","혼자 정리할 시간이 필요함","중요한 연락은 챙김","돌아오는 타이밍은 있음"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"🌫️",
+      type:"흐릿한 잠수형",
+      name:"읽었지만 존재하지 않는 사람",
+      desc:"당신은 부담스러운 연락 앞에서 자주 조용해진다. 답해야 한다는 걸 알지만 손이 쉽게 가지 않는다. 읽고, 미루고, 다시 보고, 또 미룬다. 그러다 어느 순간 타이밍을 놓쳐 더 조용해진다.",
+      traits:["읽고 답장을 미루는 편","부담스러운 연락을 피함","타이밍을 자주 놓침","연락이 쌓이면 더 안 봄"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"🫥",
+      type:"완전 잠수형",
+      name:"알림창 밖으로 사라진 사람",
+      desc:"당신은 부담이 커지면 세상에서 조용히 로그아웃한다. 전화, 카톡, 단톡방, SNS까지 전부 멀어진다. 누군가를 싫어해서라기보다, 대답해야 하는 상황 자체가 너무 피곤할 때가 많다.",
+      traits:["연락두절 시간이 김","부담되면 앱을 안 봄","전화보다 무음이 편함","혼자 사라져야 회복됨"]
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+  let finalResultIndex = null;
+
+  function startQuiz(){
+    history.replaceState(null, "", location.pathname);
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
+
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
+
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(point){
+    score += point;
+    current++;
+
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
+
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    finalResultIndex = results.findIndex(r => score >= r.min && score <= r.max);
+    finalResult = results[finalResultIndex];
+
+    renderResult(finalResult);
+  }
+
+  function renderResult(resultData){
+    document.getElementById("resultIcon").innerText = resultData.icon;
+    document.getElementById("resultType").innerText = resultData.type;
+    document.getElementById("resultName").innerText = resultData.name;
+    document.getElementById("resultDesc").innerText = resultData.desc;
+
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
+
+    resultData.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
+
+  function openSharedResult(){
+    const params = new URLSearchParams(location.search);
+    const resultParam = params.get("r");
+
+    if(resultParam === null) return;
+
+    const index = Number(resultParam);
+
+    if(Number.isNaN(index) || !results[index]) return;
+
+    finalResultIndex = index;
+    finalResult = results[index];
+
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    renderResult(finalResult);
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    finalResultIndex = null;
+
+    history.replaceState(null, "", location.pathname);
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const testName = document.querySelector(".title")?.innerText || "SBTI";
+    const pageUrl = `${location.origin}${location.pathname}?r=${finalResultIndex}`;
+
+    const shareText =
+`SBTI ${testName} 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
+
+    if(navigator.share){
+      navigator.share({
+        title:`SBTI ${testName} 테스트`,
+        text:shareText
+      });
+    }else{
+      navigator.clipboard.writeText(shareText);
+      alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", openSharedResult);
+</script>
