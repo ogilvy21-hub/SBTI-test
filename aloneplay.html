@@ -1,0 +1,446 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
+</style>
+
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">혼자놀기력</h1>
+    <p class="sub">나는 혼자 있는 시간을 얼마나 잘 즐기는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
+
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
+</div>
+
+<script>
+  const questions = [
+    {
+      q:"갑자기 혼자 시간이 생겼다.",
+      a:[
+        ["조금 심심하다",0],
+        ["뭘 할지 찾아본다",1],
+        ["오히려 편하다",2],
+        ["내 시간이 드디어 열렸다",3]
+      ]
+    },
+    {
+      q:"혼자 영화 보러 가야 한다.",
+      a:[
+        ["혼자는 아직 어색하다",0],
+        ["사람 적은 시간엔 가능하다",1],
+        ["보고 싶으면 간다",2],
+        ["혼영은 집중력 최고다",3]
+      ]
+    },
+    {
+      q:"주말 약속이 취소됐다.",
+      a:[
+        ["살짝 허전하다",0],
+        ["다른 약속을 찾아본다",1],
+        ["집에서 쉬면 된다",2],
+        ["오히려 최고의 선물이다",3]
+      ]
+    },
+    {
+      q:"혼자 카페에 앉아 있다.",
+      a:[
+        ["조금 어색하다",0],
+        ["휴대폰을 본다",1],
+        ["조용해서 좋다",2],
+        ["이 시간이 제일 부자 같다",3]
+      ]
+    },
+    {
+      q:"혼자 여행을 가야 한다면?",
+      a:[
+        ["아직은 어렵다",0],
+        ["짧은 코스면 가능하다",1],
+        ["한 번쯤 해보고 싶다",2],
+        ["일정표까지 혼자 짤 수 있다",3]
+      ]
+    },
+    {
+      q:"혼자 있는 시간이 길어졌다.",
+      a:[
+        ["외로워진다",0],
+        ["조금 심심하다",1],
+        ["나쁘지 않다",2],
+        ["내 안의 평화가 살아난다",3]
+      ]
+    },
+    {
+      q:"누가 혼자 뭐 하냐고 묻는다.",
+      a:[
+        ["괜히 민망하다",0],
+        ["그냥 쉰다고 한다",1],
+        ["혼자 놀고 있다고 말한다",2],
+        ["혼자 노는 것도 바쁜 일정이다",3]
+      ]
+    },
+    {
+      q:"내 혼자놀기 스타일은?",
+      a:[
+        ["누가 있어야 편하다",0],
+        ["가끔 혼자가 좋다",1],
+        ["혼자도 꽤 잘 논다",2],
+        ["혼자 시간이 내 충전소다",3]
+      ]
+    }
+  ];
+
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"🥺",
+      type:"혼자 어색형",
+      name:"혼자 있으면 할 일이 사라지는 사람",
+      desc:"당신은 혼자 시간이 생기면 아직 조금 어색하다. 누군가와 같이 있을 때 더 편하고, 혼자 뭘 해야 할지 막막할 때가 있다. 혼자가 싫다기보다 혼자 노는 방법을 아직 덜 발견한 사람이다.",
+      traits:["혼자 시간이 조금 어색함","약속 취소가 허전함","혼자 외출이 부담스러움","사람과 함께할 때 안정감을 느낌"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"🙂",
+      type:"가벼운 혼자형",
+      name:"혼자 있어도 어찌저찌 노는 사람",
+      desc:"당신은 혼자 시간이 아주 편하진 않아도 꽤 잘 보낸다. 카페, 산책, 영상 보기처럼 익숙한 방식 안에서는 혼자도 괜찮다. 다만 낯선 장소나 긴 시간의 혼자는 아직 마음의 준비가 필요하다.",
+      traits:["익숙한 혼자 활동은 가능함","가끔 혼자 시간이 좋음","휴대폰과 함께하면 편함","짧은 혼자는 잘 버팀"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"☕",
+      type:"혼자 충전형",
+      name:"혼자 있어야 다시 살아나는 사람",
+      desc:"당신은 혼자 있는 시간을 꽤 잘 즐긴다. 누군가와 함께하는 시간도 좋지만, 혼자 카페에 앉거나 산책하며 생각을 정리하는 시간이 필요하다. 혼자는 외로움보다 회복에 가깝다.",
+      traits:["혼자 시간을 좋아함","혼자 외출도 가능함","조용한 공간에서 회복함","약속 없는 날을 소중히 여김"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"👑",
+      type:"혼자 만렙형",
+      name:"혼자 놀 때 제일 바쁜 사람",
+      desc:"당신에게 혼자 시간은 빈 시간이 아니다. 영화, 카페, 산책, 쇼핑, 여행까지 혼자서도 충분히 채울 수 있다. 오히려 누군가와 맞추지 않아도 되는 자유가 가장 큰 즐거움이다.",
+      traits:["혼자 노는 걸 진심으로 즐김","혼자 외출이 자연스러움","약속 취소가 반가울 때 있음","혼자 시간이 강한 충전소임"]
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+  let finalResultIndex = null;
+
+  function startQuiz(){
+    history.replaceState(null, "", location.pathname);
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
+
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
+
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(point){
+    score += point;
+    current++;
+
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
+
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    finalResultIndex = results.findIndex(r => score >= r.min && score <= r.max);
+    finalResult = results[finalResultIndex];
+
+    renderResult(finalResult);
+  }
+
+  function renderResult(resultData){
+    document.getElementById("resultIcon").innerText = resultData.icon;
+    document.getElementById("resultType").innerText = resultData.type;
+    document.getElementById("resultName").innerText = resultData.name;
+    document.getElementById("resultDesc").innerText = resultData.desc;
+
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
+
+    resultData.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
+
+  function openSharedResult(){
+    const params = new URLSearchParams(location.search);
+    const resultParam = params.get("r");
+
+    if(resultParam === null) return;
+
+    const index = Number(resultParam);
+
+    if(Number.isNaN(index) || !results[index]) return;
+
+    finalResultIndex = index;
+    finalResult = results[index];
+
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    renderResult(finalResult);
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    finalResultIndex = null;
+
+    history.replaceState(null, "", location.pathname);
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const testName = document.querySelector(".title")?.innerText || "SBTI";
+    const pageUrl = `${location.origin}${location.pathname}?r=${finalResultIndex}`;
+
+    const shareText =
+`SBTI ${testName} 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
+
+    if(navigator.share){
+      navigator.share({
+        title:`SBTI ${testName} 테스트`,
+        text:shareText
+      });
+    }else{
+      navigator.clipboard.writeText(shareText);
+      alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", openSharedResult);
+</script>
