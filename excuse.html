@@ -1,0 +1,446 @@
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6295549457389423"
+        crossorigin="anonymous"></script>
+
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+    background:#f3f3f3;
+    color:#222;
+  }
+  .wrap{
+    max-width:560px;
+    margin:0 auto;
+    padding:24px 18px 40px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid #ddd;
+    border-radius:16px;
+    padding:24px 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.03);
+  }
+  .title{
+    font-size:28px;
+    font-weight:800;
+    line-height:1.25;
+    margin:0 0 10px;
+  }
+  .sub{
+    font-size:16px;
+    color:#555;
+    line-height:1.6;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    margin-bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ffe8ef;
+    color:#d94b73;
+    font-size:13px;
+    font-weight:700;
+  }
+  button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:15px 16px;
+    font-size:16px;
+    font-weight:700;
+    background:#ff8fab;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:active{transform:scale(.99)}
+  .choice{
+    display:block;
+    width:100%;
+    margin-top:10px;
+    padding:15px 14px;
+    border:1px solid #e2e2e2;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+  }
+  .choice:hover{
+    background:#fff3f7;
+    border-color:#ffb6c9;
+  }
+  .progress{
+    width:100%;
+    height:10px;
+    background:#e9e9e9;
+    border-radius:999px;
+    overflow:hidden;
+    margin:18px 0 20px;
+  }
+  .bar{
+    width:0%;
+    height:100%;
+    background:#ff8fab;
+    border-radius:999px;
+    transition:.25s;
+  }
+  .qnum{
+    font-size:13px;
+    color:#999;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .question{
+    font-size:22px;
+    font-weight:800;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .result-icon{
+    font-size:48px;
+    margin-bottom:10px;
+  }
+  .result-type{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#f1f1f1;
+    color:#777;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:10px;
+  }
+  .result-name{
+    font-size:27px;
+    font-weight:900;
+    line-height:1.3;
+    margin-bottom:14px;
+  }
+  .result-desc{
+    font-size:16px;
+    color:#444;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+  .traits{
+    display:grid;
+    gap:8px;
+    margin:18px 0 22px;
+  }
+  .trait{
+    background:#fff4f7;
+    border-radius:14px;
+    padding:12px 13px;
+    font-size:14px;
+    color:#444;
+    font-weight:700;
+  }
+  .share{
+    background:#222;
+    margin-top:8px;
+  }
+  .restart{
+    background:#aaa;
+    margin-top:8px;
+  }
+  .hidden{display:none}
+  .adsense-inpost-bottom{
+    margin:24px 0 8px;
+  }
+  .home-link{
+    display:inline-block;
+    margin-top:1rem;
+    font-size:13px;
+    color:#888;
+    text-decoration:none;
+  }
+</style>
+
+<div class="wrap">
+  <section id="intro" class="card">
+    <div class="badge">SBTI테스트</div>
+    <h1 class="title">핑계력</h1>
+    <p class="sub">나는 위기의 순간 얼마나 자연스럽게 빠져나가는 사람일까?</p>
+    <button onclick="startQuiz()">테스트 시작하기</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="qnum" id="qnum"></div>
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result-icon" id="resultIcon"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-name" id="resultName"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="traits" id="traits"></div>
+
+    <button class="share" onclick="shareResult()">결과 공유하기</button>
+    <button class="restart" onclick="restartQuiz()">다시 테스트하기</button>
+
+    <div class="adsense-slot adsense-inpost-bottom">
+      <ins class="adsbygoogle"
+           style="display:block; width:100%;"
+           data-ad-client="ca-pub-6295549457389423"
+           data-ad-slot="4063532035"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <a class="home-link" href="./index.html">← 테스트 모음으로 돌아가기</a>
+  </section>
+</div>
+
+<script>
+  const questions = [
+    {
+      q:"약속 시간에 늦을 것 같다.",
+      a:[
+        ["솔직하게 늦는다고 말한다",0],
+        ["조금 돌려서 말한다",1],
+        ["교통 상황을 먼저 떠올린다",2],
+        ["이미 머릿속에 서사가 완성됐다",3]
+      ]
+    },
+    {
+      q:"하기 싫은 부탁을 받았다.",
+      a:[
+        ["정중하게 거절한다",0],
+        ["생각해본다고 한다",1],
+        ["일정이 있는 척한다",2],
+        ["없는 일정도 오늘 생긴다",3]
+      ]
+    },
+    {
+      q:"일을 미뤄놓고 들켰다.",
+      a:[
+        ["미안하다고 말한다",0],
+        ["바로 처리하겠다고 한다",1],
+        ["다른 일 때문에 늦었다고 한다",2],
+        ["상황 설명이 거의 브리핑급이다",3]
+      ]
+    },
+    {
+      q:"모임에 가기 싫어졌다.",
+      a:[
+        ["못 간다고 바로 말한다",0],
+        ["컨디션을 핑계로 댄다",1],
+        ["집안일을 슬쩍 꺼낸다",2],
+        ["갑자기 내 주변 모두가 바빠진다",3]
+      ]
+    },
+    {
+      q:"실수한 이유를 설명해야 한다.",
+      a:[
+        ["내 실수라고 인정한다",0],
+        ["상황이 있었다고 말한다",1],
+        ["여러 이유를 섞어 말한다",2],
+        ["듣다 보면 내가 피해자다",3]
+      ]
+    },
+    {
+      q:"운동을 안 한 이유는?",
+      a:[
+        ["그냥 안 했다",0],
+        ["피곤해서 쉬었다",1],
+        ["시간이 애매했다",2],
+        ["날씨, 컨디션, 일정이 전부 반대했다",3]
+      ]
+    },
+    {
+      q:"전화 받기 싫을 때 나는?",
+      a:[
+        ["나중에 전화한다고 보낸다",0],
+        ["못 봤다고 한다",1],
+        ["회의 중이었다고 한다",2],
+        ["휴대폰이 거의 산속에 있었던 설정이다",3]
+      ]
+    },
+    {
+      q:"내 핑계 스타일은?",
+      a:[
+        ["핑계보다 솔직한 편",0],
+        ["가끔 필요한 만큼만 한다",1],
+        ["상황에 맞게 잘 만든다",2],
+        ["핑계가 아니라 거의 창작 활동이다",3]
+      ]
+    }
+  ];
+
+  const results = [
+    {
+      min:0,
+      max:5,
+      icon:"😌",
+      type:"정직 직진형",
+      name:"핑계보다 사과가 빠른 사람",
+      desc:"당신은 상황을 길게 꾸미지 않는다. 늦으면 늦었다고 말하고, 못 하면 못 한다고 말한다. 어색한 순간은 있어도 이야기를 부풀리며 빠져나가려 하지 않는다. 가끔은 너무 솔직해서 주변이 더 당황할 때도 있다.",
+      traits:["솔직하게 말하는 편","상황을 오래 꾸미지 않음","거절도 비교적 담백함","실수 인정이 빠름"]
+    },
+    {
+      min:6,
+      max:11,
+      icon:"🙂",
+      type:"생활형 핑계형",
+      name:"사회생활용 핑계는 장착한 사람",
+      desc:"당신은 필요할 때만 가벼운 핑계를 쓴다. 상대를 불편하게 만들지 않으려고 말을 둥글게 바꾸고, 상황을 조금 부드럽게 포장한다. 거짓말쟁이라기보다는 사회생활의 쿠션을 아는 사람에 가깝다.",
+      traits:["필요한 만큼만 둘러댐","거절할 때 말이 부드러움","상대 반응을 신경 씀","크게 무리한 핑계는 안 댐"]
+    },
+    {
+      min:12,
+      max:17,
+      icon:"😎",
+      type:"순발력 핑계형",
+      name:"위기 오면 말이 먼저 나오는 사람",
+      desc:"당신은 갑작스러운 상황에서도 말문이 막히지 않는다. 늦은 이유, 빠지는 이유, 못 한 이유가 꽤 자연스럽게 나온다. 스스로도 가끔 놀란다. 방금 생각한 말인데 이상하게 그럴듯하다.",
+      traits:["순간 대처가 빠름","상황 설명을 잘 만듦","난처한 순간에 강함","핑계가 꽤 자연스러움"]
+    },
+    {
+      min:18,
+      max:24,
+      icon:"🎬",
+      type:"서사 창작형",
+      name:"핑계에 세계관이 있는 사람",
+      desc:"당신의 핑계는 단순한 변명이 아니다. 등장인물, 배경, 사건, 날씨까지 묘하게 갖춰진다. 처음엔 빠져나가려고 시작했는데 말하다 보면 어느새 한 편의 에피소드가 된다. 문제는 가끔 본인도 믿기 시작한다는 것이다.",
+      traits:["핑계에 디테일이 많음","없는 일정도 자연스럽게 생김","상황 설명이 길어짐","위기 때 창의력이 폭발함"]
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let finalResult = null;
+  let finalResultIndex = null;
+
+  function startQuiz(){
+    history.replaceState(null, "", location.pathname);
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion(){
+    const q = questions[current];
+    document.getElementById("qnum").innerText = `${current + 1} / ${questions.length}`;
+    document.getElementById("bar").style.width = `${((current) / questions.length) * 100}%`;
+    document.getElementById("question").innerText = q.q;
+
+    const choices = document.getElementById("choices");
+    choices.innerHTML = "";
+
+    q.a.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "choice";
+      btn.innerText = item[0];
+      btn.onclick = () => selectAnswer(item[1]);
+      choices.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(point){
+    score += point;
+    current++;
+
+    if(current < questions.length){
+      showQuestion();
+    }else{
+      showResult();
+    }
+  }
+
+  function showResult(){
+    document.getElementById("bar").style.width = "100%";
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    finalResultIndex = results.findIndex(r => score >= r.min && score <= r.max);
+    finalResult = results[finalResultIndex];
+
+    renderResult(finalResult);
+  }
+
+  function renderResult(resultData){
+    document.getElementById("resultIcon").innerText = resultData.icon;
+    document.getElementById("resultType").innerText = resultData.type;
+    document.getElementById("resultName").innerText = resultData.name;
+    document.getElementById("resultDesc").innerText = resultData.desc;
+
+    const traits = document.getElementById("traits");
+    traits.innerHTML = "";
+
+    resultData.traits.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "trait";
+      div.innerText = t;
+      traits.appendChild(div);
+    });
+  }
+
+  function openSharedResult(){
+    const params = new URLSearchParams(location.search);
+    const resultParam = params.get("r");
+
+    if(resultParam === null) return;
+
+    const index = Number(resultParam);
+
+    if(Number.isNaN(index) || !results[index]) return;
+
+    finalResultIndex = index;
+    finalResult = results[index];
+
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    renderResult(finalResult);
+  }
+
+  function restartQuiz(){
+    current = 0;
+    score = 0;
+    finalResult = null;
+    finalResultIndex = null;
+
+    history.replaceState(null, "", location.pathname);
+
+    document.getElementById("result").classList.add("hidden");
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("intro").classList.remove("hidden");
+  }
+
+  function shareResult(){
+    const testName = document.querySelector(".title")?.innerText || "SBTI";
+    const pageUrl = `${location.origin}${location.pathname}?r=${finalResultIndex}`;
+
+    const shareText =
+`SBTI ${testName} 테스트 결과: ${finalResult.name}
+
+나도 테스트 해보기
+${pageUrl}`;
+
+    if(navigator.share){
+      navigator.share({
+        title:`SBTI ${testName} 테스트`,
+        text:shareText
+      });
+    }else{
+      navigator.clipboard.writeText(shareText);
+      alert("결과가 복사됐습니다. 카톡이나 SNS에 붙여넣어 주세요.");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", openSharedResult);
+</script>
